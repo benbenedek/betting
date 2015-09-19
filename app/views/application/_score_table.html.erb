@@ -1,0 +1,35 @@
+<table class="table">
+<thead>
+  <th>משתמש / מחזור</th>
+  <% Fixture.all.each { |fixture| %>
+    <% next if fixture.all_games_dont_hava_scores? %>
+    <th><%= fixture.number %></th>
+  <% } %>
+  <th>סה"כ</th>
+</thead>
+<tbody>
+<% User.all.each { |user| %>
+    <tr>
+    <td><%= user.name %>
+    <% total_success_count = 0 %>
+    <% total_games_count = 0 %>
+  <% Fixture.all.each { |fixture| %>
+    <% next if fixture.all_games_dont_hava_scores? %>
+    <% fb = fixture.get_fixture_bet %>
+    <% user_fixture_bet = fb.get_fixture_bet_for_user(user, fixture.matches) %>
+    <td>
+      <% success_count = 0 %>
+      <% user_fixture_bet.bets.each { |bet| success_count += 1 if bet.prediction.eql?(bet.match.bet_score) } %>
+      <%= "#{user_fixture_bet.bets.count} / #{success_count}" %>
+    </td>
+    <% total_success_count += success_count %>
+    <% total_games_count += user_fixture_bet.bets.count %>
+  <% } %>
+  <td>
+    <%= "#{total_games_count} / #{total_success_count}" %>
+  </td>
+  </tr>
+<% } %>
+</tbody>
+
+</table>

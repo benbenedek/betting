@@ -1,0 +1,17 @@
+<div class="teams row">
+  <tr>
+  <td>
+    <%= match.home_info %>
+  </td>
+  <td>
+    -
+  </td>
+  <td>
+    <%= match.away_info %>
+  </td>
+  <td>
+    <%= match.bet_score %>
+  </td>
+  <%= render partial: 'single_match_bet', locals: { match_bet: bet_for_match, match: match } %>
+  </tr>
+</div>

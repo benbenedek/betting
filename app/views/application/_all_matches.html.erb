@@ -1,0 +1,14 @@
+<table class="table">
+<thead>
+  <th>בית</th>
+  <th></th>
+  <th>חוץ</th>
+  <th>תוצאה</th>
+  <th>הימור</th>
+</thead>
+<tbody>
+<% matches.each { |match| %>
+  <%= render partial: 'single_match', locals: {match: match, bet_for_match: fixture_bet_for_user.bets.where("match_id = #{match.id}").first}  %>
+<% } %>
+</tbody>
+</table>

@@ -1,0 +1,15 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "לך הביתה", root_path %></li>
+        <li><%= link_to "Help", "help_path" %></li>
+        <% if logged_in? %>
+            <li><%= link_to "צא בחוץ", logout_path %></li>
+        <% else %>
+            <li><%= link_to "כנס ימניאק כנס", login_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
