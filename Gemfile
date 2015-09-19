@@ -33,6 +33,7 @@ gem 'rest-client'
 
 gem 'tzinfo'
 gem 'tzinfo-data'
+gem 'sprockets-rails'
 
 
 # Use Unicorn as the app server
