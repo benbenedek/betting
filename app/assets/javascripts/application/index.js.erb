@@ -12,10 +12,21 @@ function placeBet(item) {
   });
 }
 
+function toggleBets(item) {
+  var $this = $(this);
+  // $this will contain a reference to the checkbox
+  if ($this.is(':checked')) {
+    $(".other_user_bet").removeClass("hidden");
+  } else {
+    $(".other_user_bet").addClass("hidden");
+  }
+}
+
 function readyOnce() {}
 
 function readyAgain(){
   $(".js-bet-click").click(placeBet);
+  $(".show-other-bets").click(toggleBets)
 }
 
 $(document).ready(function() {

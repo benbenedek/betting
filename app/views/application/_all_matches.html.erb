@@ -5,6 +5,9 @@
   <th>חוץ</th>
   <th>תוצאה</th>
   <th>הימור</th>
+  <% User.where("id != #{current_user.id}").order(:id).each {|user| %>
+    <th class="hidden other_user_bet"><%= user.name %></th>
+  <% } %>
 </thead>
 <tbody>
 <% matches.each { |match| %>

@@ -1,5 +1,11 @@
 <div align="right">
   <h1>מחזור כדורגל <%= fixture.number %></h1>
   <%= render partial: 'all_matches', locals: {matches: fixture.matches, fixture_bet_for_user: @user_fixture_bet}  %>
+  <div class="checkbox">
+    <label>
+      <input align="right" class="show-other-bets" type="checkbox"> תראה את ההימורים של כולם
+    </label>
+  </div>
   <%= link_to_prev_fixture(fixture) %> <%= link_to_next_fixture(fixture) %>
 </div>
+<br/><br/>
