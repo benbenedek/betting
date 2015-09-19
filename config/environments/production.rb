@@ -13,7 +13,7 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
 
-  config.assets.precompile =  ['*.js', '*.css']
+  config.assets.precompile =  ['*.js']
   config.serve_static_assets = true
   config.serve_static_files = true
   config.assets.compile = true
