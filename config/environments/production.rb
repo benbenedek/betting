@@ -14,5 +14,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.assets.precompile =  ['*.js', '*.css']
+  config.serve_static_assets = true
+  config.serve_static_files = true
+  config.assets.compile = true
 
 end
