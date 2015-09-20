@@ -6,6 +6,22 @@
       <input align="right" class="show-other-bets" type="checkbox"> תראה את ההימורים של כולם
     </label>
   </div>
-  <%= link_to_prev_fixture(fixture) %> <%= link_to_next_fixture(fixture) %>
+  </br>
+  <div class='row'>
+    <div class='col-md-2'>
+      <%= link_to_prev_fixture(fixture) %> <%= link_to_next_fixture(fixture) %>
+    </div>
+    <div class="dropdown col-md-1">
+      לך למחזור
+      <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">בחר מחזור
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+        <% Fixture.all.order('number').each { |fixture| %>
+          <li role="presentation"><%= link_to "#{fixture.number}", "#{fixture_path(:id => fixture.number)}.js", remote: true, :html => {:id => "fixture_ajax_trigger"} %></li>
+        <% } %>
+      </ul>
+    </div>
+
+  </div>
 </div>
 <br/><br/>
