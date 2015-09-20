@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
 
+  get 'scores'   => 'application#scoretable'
   get "/fixture/:id" => 'application#fixture', as: 'fixture', format: :js
   post "/place_bet/:match_bet_id" => 'application#place_bet', format: :js
 

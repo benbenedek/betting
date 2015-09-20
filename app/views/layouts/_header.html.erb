@@ -4,6 +4,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "דף בית", root_path %></li>
         <% if logged_in? %>
+            <li><%= link_to "תוצאות", scores_path %></li>
             <li><%= link_to "התנתק", logout_path %></li>
         <% else %>
             <li><%= link_to "התחבר", login_path %></li>

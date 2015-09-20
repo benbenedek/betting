@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     @user_fixture_bet = @fixture.get_fixture_bet_for_user(current_user)
   end
 
+  def scoretable
+    redirect_to login_path and return unless logged_in?
+  end
+
   def fixture
     @fixture = Fixture.find_by_number(params[:id])
     if @fixture.all_games_dont_hava_scores?
