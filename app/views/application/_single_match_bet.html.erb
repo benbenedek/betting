@@ -13,7 +13,6 @@
   </label>
 </div>
 </td>
-<td><span id='<%= "success_for_#{match_bet.id}" %>' class="label label-success" style="display: none">הימור התקבל</span></td>
 <% else %>
   <td class="<%= match.bet_score == prediction ? "success" : "info" %>"><%= prediction %></td>
 <% end %>
@@ -22,3 +21,4 @@
   <% bet = fb.bets.where("match_id = #{match.id}").first %>
   <td class="hidden other_user_bet <%= match.bet_score == bet.prediction ? "success" : "info" %>"><%= bet.prediction %></td>
 <% } %>
+<td><span id='<%= "success_for_#{match_bet.id}" %>' class="label label-success" style="display: none">הימור התקבל</span></td>
