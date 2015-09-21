@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   def index
     redirect_to login_path and return unless logged_in?
     @fixture = Fixture.get_upcoming_fixture
+    debugger
     if @fixture.all_games_dont_hava_scores?
       Migration.get_scores_for_fixture_id(@fixture.id)
       @fixture.reload

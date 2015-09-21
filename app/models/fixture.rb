@@ -14,7 +14,7 @@ class Fixture < ActiveRecord::Base
   end
 
   def all_games_dont_hava_scores?
-    matches.find { |match| match.has_score? }.nil?
+    matches.find { |match| !match.has_score? }.present?
   end
 
   def get_fixture_bet
