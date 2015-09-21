@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def index
     redirect_to login_path and return unless logged_in?
-    @fixture = Fixture.get_upcoming_fixture
+    @fixture = params[:number].present? ? Fixture.find_by_number(params[:number]) : Fixture.get_upcoming_fixture
     if @fixture.all_games_dont_hava_scores?
       Migration.get_scores_for_fixture_id(@fixture.id)
       @fixture.reload
@@ -17,18 +17,6 @@ class ApplicationController < ActionController::Base
 
   def scoretable
     redirect_to login_path and return unless logged_in?
-  end
-
-  def fixture
-    @fixture = Fixture.find_by_number(params[:id])
-    if @fixture.all_games_dont_hava_scores?
-      Migration.get_scores_for_fixture_id(@fixture.id)
-      @fixture.reload
-    end
-    @user_fixture_bet = @fixture.get_fixture_bet_for_user(current_user)
-    respond_to do |format|
-        format.js
-    end
   end
 
   def place_bet

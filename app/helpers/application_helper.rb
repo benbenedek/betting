@@ -20,11 +20,11 @@ module ApplicationHelper
   end
 
   def link_to_next_fixture(fixture)
-    link_to "מחזור הבא", "#{fixture_path(:id => fixture.number + 1)}.js", remote: true, :html => {:id => "fixture_ajax_trigger"}
+    link_to "מחזור הבא", index_path(:number => fixture.number + 1), :class=>"loader-ajax-link"
   end
 
   def link_to_prev_fixture(fixture)
     return if fixture.number < 2
-    link_to "מחזור הקודם", "#{fixture_path(:id => fixture.number - 1 )}.js", remote: true, :html => {:id => "fixture_ajax_trigger"}
+    link_to "מחזור הקודם", index_path(:number => fixture.number - 1 ), :class=>"loader-ajax-link"
   end
 end

@@ -22,11 +22,22 @@ function toggleBets(item) {
   }
 }
 
-function readyOnce() {}
+function readyOnce() {
+  $('.loader-ajax-link').bind('ajax:beforeSend', function(evt, data, status, xhr){
+    NProgress.start();
+  });
+
+  $('.loader-ajax-link').bind('ajax:complete', function(evt, data, status, xhr){
+    NProgress.done();
+  });
+}
 
 function readyAgain(){
   $(".js-bet-click").click(placeBet);
-  $(".show-other-bets").click(toggleBets)
+  $(".show-other-bets").click(toggleBets);
+  $(document).on('page:fetch',   function() { NProgress.start(); });
+  $(document).on('page:change',  function() { NProgress.done(); });
+  $(document).on('page:restore', function() { NProgress.remove(); });
 }
 
 $(document).ready(function() {
