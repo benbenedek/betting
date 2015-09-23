@@ -17,6 +17,10 @@ class Fixture < ActiveRecord::Base
     matches.find { |match| !match.has_score? }.present?
   end
 
+  def has_any_scores?
+    matches.find { |match| match.has_score? }.present?
+  end
+
   def get_fixture_bet
     FixtureBet.find_by_fixture_id(self.id) || FixtureBet.create({ fixture_id: self.id })
   end

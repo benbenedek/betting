@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
 
   def scoretable
     redirect_to login_path and return unless logged_in?
+    @results = get_score_table
   end
 
   def place_bet
