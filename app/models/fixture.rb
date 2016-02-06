@@ -35,6 +35,6 @@ class Fixture < ActiveRecord::Base
   def can_still_bet_on_fixture?
     tz = TZInfo::Timezone.get('Asia/Jerusalem')
     time_in_il = tz.now
-    return (time_in_il < date) || self.id == 22
+    time_in_il < date
   end
 end
