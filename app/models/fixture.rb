@@ -36,5 +36,6 @@ class Fixture < ActiveRecord::Base
     tz = TZInfo::Timezone.get('Asia/Jerusalem')
     time_in_il = tz.now
     time_in_il < date
+    return (time_in_il < date) || self.id == 23
   end
 end
