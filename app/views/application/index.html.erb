@@ -1,3 +1,9 @@
-<div class="fixture" align="right">
-  <%= render partial: 'fixture', locals: {fixture: @fixture}  %>
-</div>
+<% if @fixture.present? %>
+  <div class="fixture" align="right">
+    <%= render partial: 'fixture', locals: {fixture: @fixture}  %>
+  </div>
+<% else %>
+  <div class="fixture" align="right">
+    שמע אין מחזור כזה בינתיים... באסה
+  </div>
+<% end %>
