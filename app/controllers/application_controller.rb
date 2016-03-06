@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
     redirect_to login_path and return unless logged_in?
     @fixture = params[:number].present? ? Fixture.find_by_number(params[:number]) : Fixture.get_upcoming_fixture
 
+    return unless @fixture.present?
+
     Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 1.hours) do
       if @fixture.all_games_dont_hava_scores?
         Migration.get_scores_for_fixture_id(@fixture.id)
