@@ -7,5 +7,6 @@ Bundler.require(*Rails.groups)
 module Betting
   class Application < Rails::Application
     config.active_record.raise_in_transactional_callbacks = true
+    config.assets.precompile += %w( graphs.js )
   end
 end

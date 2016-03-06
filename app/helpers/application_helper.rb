@@ -1,4 +1,13 @@
 module ApplicationHelper
+
+  def is_number?(str)
+    if !/\A\d+\z/.match(str)
+        false
+    else
+        true
+    end
+  end
+
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
@@ -59,5 +68,38 @@ module ApplicationHelper
     results[:res] = results[:res].sort_by { |k, v| v[:total][:success] }
     results[:res].reverse!
     results
+  end
+
+  def prepare_graphs_data(data)
+    hash = {}
+
+    hash[:labels] = data[:table_head].map { |name|
+      is_number?(name) ? "מחזור #{name.to_i}" : nil
+    }.compact
+
+    user_results = data[:res].to_h
+    c = 160
+    hash[:datasets] = user_results.map { |k,v|
+      sum = 0
+      user_data = v.map { |k2, v2|
+        sum = v2[:success].to_i + sum
+        sum
+      }
+
+      c = c + 20
+      {
+        label: k,
+        fillColor: "rgba(#{c.to_i},#{c.to_i},220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: user_data
+      }
+    }
+
+
+    raw hash.to_json
   end
 end
