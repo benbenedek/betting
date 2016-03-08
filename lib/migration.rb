@@ -7,8 +7,8 @@ module Migration
   end
 
   def run_migration
-    league = League.create({name: "Ligat ha al", season: "2015/2016"})
-    (1..26).each { |idx|
+    league = League.find_by_name("Ligat ha al")
+    (27..36).each { |idx|
       page_url = "http://football.org.il/Leagues/Pages/FullRoundGamesList.aspx?team_id=%D7%9B%D7%9C%20%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA&round_number=#{idx}&league_id=-1"
       page = Nokogiri::HTML(RestClient.get(page_url))
       fixture = Fixture.create({number: idx})
