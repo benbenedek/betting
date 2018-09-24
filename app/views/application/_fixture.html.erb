@@ -17,7 +17,7 @@
       <span class="caret"></span></button>
       <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
         <% Fixture.all.order('number').each { |fixture| %>
-          <li role="presentation"><%= link_to "מחזור #{fixture.number}", index_path(number: fixture.number), :class=>"loader-ajax-link" %></li>
+          <li role="presentation"><%= link_to "מחזור #{fixture.number}", index_path(league_id: fixture.league_id, number: fixture.number), :class=>"loader-ajax-link" %></li>
         <% } %>
       </ul>
     </div>
