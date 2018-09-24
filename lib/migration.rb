@@ -31,7 +31,7 @@ module Migration
     }
   end
 
-  def get_scores_for_fixture_id(id)
+  def get_scores_for_fixture_id(league_id, id)
     fixture = Fixture.find(id)
     return if fixture.nil?
 

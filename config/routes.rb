@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'scores'   => 'application#scoretable'
   post "/place_bet/:match_bet_id" => 'application#place_bet', format: :js
-  get "/:number" => 'application#index', as: 'index'
+  get "/:league_id/:number" => 'application#index', as: 'index'
 
   root 'application#index'
 
