@@ -40,7 +40,42 @@ function readyAgain(){
   $(document).on('page:restore', function() { NProgress.remove(); });
 }
 
+function setUpTimer(diffTime) {
+    var interval = 1000,
+      duration = moment.duration(diffTime * 1000, 'milliseconds'),
+      container = $('#leftover-time');
+
+    setInterval(function(){
+        if(diffTime < 0) {
+          container.text('נגמר הזמן');
+          return;
+        }
+        duration = moment.duration(duration.asMilliseconds() - interval, 'milliseconds')
+        var d = moment.duration(duration).days(),
+            h = moment.duration(duration).hours(),
+            m = moment.duration(duration).minutes(),
+            s = moment.duration(duration).seconds(),
+            str = "";
+
+        d = $.trim(d).length === 1 ? '0' + d : d;
+        h = $.trim(h).length === 1 ? '0' + h : h;
+        m = $.trim(m).length === 1 ? '0' + m : m;
+        s = $.trim(s).length === 1 ? '0' + s : s;
+
+        str = str.concat(d + " ימים ");
+        str = str.concat(h + " שעות ");
+        str = str.concat(m + " דקות ");
+        str = str.concat(s + " שניות ");
+
+        container.text(str);
+        // show how many hours, minutes and seconds are left
+    }, interval);
+}
+
 $(document).ready(function() {
   readyOnce();
   readyAgain();
+  setUpTimer(document.lastBetDate);
 });
+
+

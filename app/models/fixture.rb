@@ -32,9 +32,19 @@ class Fixture < ActiveRecord::Base
     fb.get_fixture_bet_for_user(user, matches)
   end
 
+  def default_timezone
+    TZInfo::Timezone.get('Asia/Jerusalem')
+  end
+
+  def seconds_left_to_bet
+    last_bet_date - default_timezone.now
+  end
+
+  def last_bet_date
+    (date - 3.hours).in_time_zone(default_timezone)
+  end
+
   def can_still_bet_on_fixture?
-    tz = TZInfo::Timezone.get('Asia/Jerusalem')
-    time_in_il = tz.now
-    time_in_il < date
+    default_timezone.now < last_bet_date
   end
 end

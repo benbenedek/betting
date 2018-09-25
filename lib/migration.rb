@@ -32,9 +32,9 @@ module Migration
   end
 
   def fetch_season(league_id, season_id)
-    new_league = League.create!(name: 'Ligat ha al', season: '2018/2019')
+    new_league = League.create!(name: 'Ligat ha al', season: '2018/2019', id: 2)
 
-    league_stats = get_league_stats
+    league_stats = Migration.get_league_stats
 
     teams = league_stats.css('div[class="league-table table-w-playoff"]').css('section[class="playoff-container"]').css('a')
 
@@ -52,11 +52,14 @@ module Migration
     games = games_wrapper.css('a[class="table_row link_url"]')
     first_game = games.first
     fixture_date = first_game.children.first.children[1].text
-    date = DateTime.parse(fixture_date, '%d/%m/%Y')
+    parsed_fixture_date = DateTime.parse(fixture_date, '%d/%m/%Y')
     fixture = Fixture.where(league: league, number: fixture_round).first ||
-        Fixture.new(league: league, date: date, number: fixture_round)
+        Fixture.new(league: league, date: parsed_fixture_date, number: fixture_round)
 
     games.each do |game|
+        game_date = game.children.first.children[1].text
+        parsed_fixture_date = DateTime.parse(game_date, '%d/%m/%Y') if parsed_fixture_date > DateTime.parse(game_date, '%d/%m/%Y')
+
         score_node = game.css('div[class="table_col ltr result"]')
         score = nil
         if score_node.any? && score_node.children.count > 1
@@ -74,7 +77,7 @@ module Migration
         match.score = score
         match.save!
     end
-
+    fixture.date = parsed_fixture_date
     fixture.save!
   end
 
