@@ -15,8 +15,13 @@ class ApplicationController < ActionController::Base
 
     Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 1.hours) do
       if @fixture.all_games_dont_hava_scores?
-        Migration.fetch_fixture(@fixture.league_id, @fixture.id)
-        @fixture.reload
+        begin
+          Migration.fetch_fixture(@fixture.league_id, @fixture.id)
+          @fixture.reload
+        rescue => e
+          Rails.logger.error "Got error #{e}"
+          nil
+        end
       end
     end
 
