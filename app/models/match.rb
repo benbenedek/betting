@@ -5,15 +5,11 @@ class Match < ActiveRecord::Base
   belongs_to :away_team, class_name: Team, :foreign_key => "away_team_id"
 
   def home_info
-    info = home_team.name
-    info << "(#{home_team_score})" if has_score?
-    info
+    home_team.name
   end
 
   def away_info
-    info = away_team.name
-    info << "(#{away_team_score})" if has_score?
-    info
+    away_team.name
   end
 
   def bet_score

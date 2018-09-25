@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915114146) do
+ActiveRecord::Schema.define(version: 20180915114156) do
 
   create_table "bets", force: :cascade do |t|
     t.string   "prediction"
@@ -35,9 +35,10 @@ ActiveRecord::Schema.define(version: 20150915114146) do
   create_table "fixtures", force: :cascade do |t|
     t.integer  "number"
     t.date     "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "league_id"
+    t.integer  "association_id"
   end
 
   create_table "league_bets", force: :cascade do |t|
@@ -51,23 +52,26 @@ ActiveRecord::Schema.define(version: 20150915114146) do
   create_table "leagues", force: :cascade do |t|
     t.string   "name"
     t.string   "season"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "association_id"
   end
 
   create_table "matches", force: :cascade do |t|
     t.string   "score"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "fixture_id"
     t.integer  "home_team_id"
     t.integer  "away_team_id"
+    t.integer  "association_id"
   end
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "association_id"
   end
 
   create_table "user_bets", force: :cascade do |t|

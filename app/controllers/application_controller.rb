@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
   def index
     redirect_to login_path and return unless logged_in?
     @fixture = params[:number].present? ?
-      Fixture.where(league_id: params[:league_id].to_i, id: params[:number].to_i).first :
+      Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).first :
       Fixture.get_upcoming_fixture
 
     return unless @fixture.present?
 
     Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 1.hours) do
       if @fixture.all_games_dont_hava_scores?
-        Migration.get_scores_for_fixture_id(@fixture.league_id, @fixture.id)
+        Migration.fetch_fixture(@fixture.league_id, @fixture.id)
         @fixture.reload
       end
     end
