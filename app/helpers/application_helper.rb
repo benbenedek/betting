@@ -54,7 +54,7 @@ module ApplicationHelper
       results[:res][user.name] = {}
       total_success = 0
       total_games = 0
-      Fixture.all.each { |fixture|
+      Fixture.where(league_id: league_id).each { |fixture|
         next unless fixture.has_any_scores?
         fb = fixture.get_fixture_bet
         user_fixture_bet = fb.get_fixture_bet_for_user(user, fixture.matches)
