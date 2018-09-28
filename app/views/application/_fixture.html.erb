@@ -3,8 +3,8 @@
 </script>
 
 <div align="right">
-  <h1>מחזור כדורגל <%= fixture.number %></h1>
-  <h2>זמן נותר להמר: <span id='leftover-time'></div></h2>
+  <h1>מחזור כדורגל <%= fixture.number %></h1> <span id='leftover-time'></div>
+
   <%= render partial: 'all_matches', locals: {matches: fixture.matches, fixture_bet_for_user: @user_fixture_bet}  %>
   <div class="checkbox">
     <label>

@@ -41,10 +41,10 @@ module ApplicationHelper
     index_path(league_id: league_id, number: fixture_id)
   end
 
-  def get_score_table
+  def get_score_table(league_id)
     results = { table_head: ["משתמש/מחזור"], res: {} }
 
-    Fixture.all.each { |fixture|
+    Fixture.where(league_id: league_id).each { |fixture|
       next unless fixture.has_any_scores?
       results[:table_head].push("#{fixture.number}")
     }
