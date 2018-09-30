@@ -1,6 +1,19 @@
-<h1><%= @league.name %> - <%= @league.season %></h1>
+<div>
+  <h1><%= @league.pretty_name %></h1>
+  <div class="dropdown col-md-1">
+    לך לליגה
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">בחר ליגה
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <% League.all.each { |league| %>
+        <li role="presentation"><%= link_to league.pretty_name, scoretable_path(league_id: league.id), :class=>"loader-ajax-link" %></li>
+      <% } %>
+    </ul>
+  </div>
+</div>
 <div class="score-table" align="right">
   <%= render partial: 'score_table' %>
 
   <%= render partial: 'graphs' %>
+
 </div>
