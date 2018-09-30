@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180915114156) do
+ActiveRecord::Schema.define(version: 20180930114156) do
 
   create_table "bets", force: :cascade do |t|
     t.string   "prediction"
@@ -65,6 +65,9 @@ ActiveRecord::Schema.define(version: 20180915114156) do
     t.integer  "home_team_id"
     t.integer  "away_team_id"
     t.integer  "association_id"
+    t.datetime "date"
+    t.float    "home_odds"
+    t.float    "away_odds"
   end
 
   create_table "teams", force: :cascade do |t|

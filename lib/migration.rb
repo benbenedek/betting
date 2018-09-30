@@ -74,6 +74,7 @@ module Migration
         match = Match.where(fixture: fixture, home_team: home_team, away_team: away_team).first ||
           Match.new(fixture: fixture, home_team: home_team, away_team: away_team)
 
+        match.date = game_date
         match.score = score
         match.save!
     end

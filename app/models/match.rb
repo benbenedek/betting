@@ -29,6 +29,11 @@ class Match < ActiveRecord::Base
     score.present?
   end
 
+  def pretty_date
+    return nil unless self.date
+    self.date.strftime("%d/%m/%Y")
+  end
+
   private
 
   def home_team_score
