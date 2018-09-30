@@ -48,6 +48,7 @@ module Migration
   def fetch_fixture(league_id, fixture_round)
     league = League.find_by_id(league_id)
     league_stats = get_round(fixture_round)
+    Rails.logger.error "During migration got result #{league_stats}"
     games_wrapper = league_stats.css('div[class="table_view full_view results-grid results-home teams-table league-games"]')
     games = games_wrapper.css('a[class="table_row link_url"]')
     first_game = games.first
