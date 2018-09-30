@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
           @fixture.reload
         rescue => e
           Rails.logger.error "Got error #{e}"
-          nil
+          break
         end
       end
     end
