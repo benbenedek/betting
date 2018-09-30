@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
           Migration.fetch_fixture(@fixture.league_id, @fixture.id)
           @fixture.reload
         rescue => e
-          Rails.logger.error "Got error #{e}"
+          Rails.logger.error "Got error #{e}\n#{e.backtrace}"
           break
         end
       end
