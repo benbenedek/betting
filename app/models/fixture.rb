@@ -6,7 +6,7 @@ class Fixture < ActiveRecord::Base
 
   def self.get_upcoming_fixture
     current_date = DateTime.now
-    Fixture.where("date >= '#{current_date - 3.days}'").first
+    Fixture.where("date >= '#{current_date - 3.days}'").includes(:matches).first
   end
 
   def find_game_by(home_team, away_team)
@@ -22,7 +22,7 @@ class Fixture < ActiveRecord::Base
   end
 
   def get_fixture_bet
-    FixtureBet.find_by_fixture_id(self.id) || FixtureBet.create({ fixture_id: self.id })
+    FixtureBet.where(fixture_id: self.id).includes(:user_bets).first || FixtureBet.create({ fixture_id: self.id })
   end
 
   def get_fixture_bet_for_user(user)

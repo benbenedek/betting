@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def index
     redirect_to login_path and return unless logged_in?
     @fixture = params[:number].present? ?
-      Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).first :
+      Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).includes(:matches).first :
       Fixture.get_upcoming_fixture
 
     return unless @fixture.present?
