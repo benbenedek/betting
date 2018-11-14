@@ -42,3 +42,8 @@ textarea {
     color: $state-danger-text;
   }
 }
+
+.h-scroller {
+  max-width: 100%;
+  overflow: auto;
+}

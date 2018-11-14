@@ -1,18 +1,20 @@
-<table class="table">
-<thead>
-  <% @results[:table_head].each { |val| %>
-    <th><%= "#{val}" %></th>
-  <% } %>
-</thead>
-<tbody>
-<% @results[:res].each { |key, value| %>
-  <tr>
-    <td><%= key %></td>
-    <% value.each { |key,res| %>
-      <td><%= "#{res[:success]}" %></td>
+<div class="h-scroller">
+  <table class="table">
+  <thead>
+    <% @results[:table_head].each { |val| %>
+      <th><%= "#{val}" %></th>
     <% } %>
-  </tr>
-<% } %>
-</tbody>
+  </thead>
+  <tbody>
+  <% @results[:res].each { |key, value| %>
+    <tr>
+      <td><%= key %></td>
+      <% value.each { |key,res| %>
+        <td><%= "#{res[:success]}" %></td>
+      <% } %>
+    </tr>
+  <% } %>
+  </tbody>
 
-</table>
+  </table>
+</div>
