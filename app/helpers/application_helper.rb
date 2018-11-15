@@ -43,8 +43,9 @@ module ApplicationHelper
 
   def get_score_table(league_id)
     results = { table_head: ["משתמש/מחזור"], res: {} }
+    fixtures = Fixture.where(league_id: league_id).sort_by(&:number)
 
-    Fixture.where(league_id: league_id).sort_by(&:number).each { |fixture|
+    fixtures.each { |fixture|
       next unless fixture.has_any_scores?
       results[:table_head].push("#{fixture.number}")
     }
@@ -54,7 +55,7 @@ module ApplicationHelper
       results[:res][user.name] = {}
       total_success = 0
       total_games = 0
-      Fixture.where(league_id: league_id).each { |fixture|
+      fixtures.each { |fixture|
         next unless fixture.has_any_scores?
         fb = fixture.get_fixture_bet
         user_fixture_bet = fb.get_fixture_bet_for_user(user, fixture.matches)
