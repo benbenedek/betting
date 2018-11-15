@@ -44,7 +44,7 @@ module ApplicationHelper
   def get_score_table(league_id)
     results = { table_head: ["משתמש/מחזור"], res: {} }
 
-    Fixture.where(league_id: league_id).each { |fixture|
+    Fixture.where(league_id: league_id).sort_by(&:number).each { |fixture|
       next unless fixture.has_any_scores?
       results[:table_head].push("#{fixture.number}")
     }
