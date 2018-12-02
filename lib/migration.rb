@@ -84,17 +84,17 @@ module Migration
   end
 
   def get_round(round_id)
-    uri = URI.parse("http://football.org.il/Components.asmx/League_AllTables")
+    uri = URI.parse("http://www.football.org.il/Components.asmx/League_AllTables")
     request = Net::HTTP::Post.new(uri)
     request.content_type = "application/x-www-form-urlencoded; charset=UTF-8"
     request["Pragma"] = "no-cache"
-    request["Origin"] = "http://football.org.il"
+    request["Origin"] = "http://www.football.org.il"
     request["Accept-Language"] = "en-US,en;q=0.9,he;q=0.8"
     request["User-Agent"] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
     request["Accept"] = "*/*"
     request["Cache-Control"] = "no-cache"
     request["X-Requested-With"] = "XMLHttpRequest"
-    request["Cookie"] = "ASP.NET_SessionIdNew=zox4duvf5ouzq5mzgkw5ghd3SazARfdmstkiHJXX+cmyLGRqQZk=; visid_incap_1491979=Da+iswq/Romx72oLKwCJRb9uqVsAAAAAQUIPAAAAAAB1+xrEjuPM9oxGW7pZV2qF; _ga=GA1.3.2014550527.1537830601; _gid=GA1.3.1618273930.1537830601; incap_ses_730_1491979=D5jrdjMsQhH8nqINvnshCvKjqVsAAAAAKDyw4A+fHOM0XcXsFhwFzw==; incap_ses_457_1491979=cnO8TeGOi0+f46i2K5hXBvgtqlsAAAAAr0pq+H/+cuAygV9qGuHhFg==; incap_ses_874_1491979=w6bzePFB7R4MKoZc1RIhDAUuqlsAAAAAW5zCIBtlP5MKTdp+086qeA==; __atuvs=5baa2dfb6ceb382b002"
+    request["Cookie"] = "__cfduid=d3ba9947f7d7836ed99d7bfb725f670671543780084; ASP.NET_SessionIdNew=cpsnusg0b5g042ua11vuy3vgx4sfhXX09k5ANP2wl3W2RoJqDe0=; _ga=GA1.3.914610362.1543780100; _gid=GA1.3.1487311413.1543780100; _fbp=fb.2.1543780100026.1384334042; __atuvc=3%7C49; __atuvs=5c0437077426432a002"
     request["Connection"] = "keep-alive"
     request["Referer"] = "http://football.org.il/leagues/league/?league_id=40&season_id=20"
     request.set_form_data({
