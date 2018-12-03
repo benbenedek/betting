@@ -90,18 +90,19 @@ module Migration
     request["Pragma"] = "no-cache"
     request["Origin"] = "http://www.football.org.il"
     request["Accept-Language"] = "en-US,en;q=0.9,he;q=0.8"
-    request["User-Agent"] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
+    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
     request["Accept"] = "*/*"
     request["Cache-Control"] = "no-cache"
     request["X-Requested-With"] = "XMLHttpRequest"
     request["Cookie"] = "__cfduid=d3ba9947f7d7836ed99d7bfb725f670671543780084; ASP.NET_SessionIdNew=cpsnusg0b5g042ua11vuy3vgx4sfhXX09k5ANP2wl3W2RoJqDe0=; _ga=GA1.3.914610362.1543780100; _gid=GA1.3.1487311413.1543780100; _fbp=fb.2.1543780100026.1384334042; __atuvc=3%7C49; __atuvs=5c0437077426432a002"
     request["Connection"] = "keep-alive"
-    request["Referer"] = "http://football.org.il/leagues/league/?league_id=40&season_id=20"
+    request["Referer"] = "http://www.football.org.il/leagues/league/?league_id=40&season_id=20"
+
     request.set_form_data({
       "box" => "10",
       "language" => "-1",
       "league_id" => "40",
-      "round" => round_id,
+      "round" => round_id.to_s,
       "season_id" => "20"
     })
 
