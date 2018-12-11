@@ -45,6 +45,7 @@ class Fixture < ActiveRecord::Base
   end
 
   def can_still_bet_on_fixture?
+    return true if self.number == 13
     default_timezone.now < last_bet_date
   end
 end
