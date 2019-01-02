@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180930114156) do
+ActiveRecord::Schema.define(version: 20190102144850) do
 
   create_table "bets", force: :cascade do |t|
     t.string   "prediction"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20180930114156) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.string   "email"
+    t.string   "auth_token"
   end
 
 end
