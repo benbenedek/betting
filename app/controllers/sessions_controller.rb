@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # Log the user in and redirect to the user's show page.
       if params[:session][:remember_me] == '1'
-        user.generate_token!
         cookies.permanent.signed[:auth_token] = user.auth_token
         cookies.permanent.signed[:user_id] = user.id
       end
@@ -23,8 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user.auth_token = nil
-    current_user.save(validate: false)
+    cookies.permanent.signed[:auth_token] = nil
     log_out
     redirect_to login_path
   end
