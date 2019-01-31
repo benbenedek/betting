@@ -49,11 +49,11 @@ module Migration
 
   def fetch_fixture(league_id, fixture_round)
     league = League.find_by_id(league_id)
-    league_stats = get_round(fixture_round)
-    Rails.logger.error "During migration got result #{league_stats}"
-    start_idx = league_stats.index("<HtmlData>")
-    html = league_stats[start_idx + "<HtmlData>".length, league_stats.index('</HtmlData>') - start_idx]
-    res = Nokogiri::HTML(html)
+    league_stats_str = get_round(fixture_round)
+    Rails.logger.error "During migration got result #{league_stats_str}"
+    start_idx = league_stats_str.index("<HtmlData>") + "<HtmlData>".length
+    html = league_stats_str[start_idx, league_stats_str.index('</HtmlData>') - start_idx]
+    res = Nokogiri::HTML(CGI.unescapeHTML("&lt;html&gt;&lt;body&gt;#{html}&lt;/body&gt;&lt;/html&gt;"))
     games_wrapper = res.css('div[class="table_view full_view results-grid results-home teams-table league-games"]')
     games = games_wrapper.css('a[class="table_row link_url"]')
     first_game = games.first
@@ -118,7 +118,7 @@ module Migration
 
     # Nokogiri::HTML(response.body)
 
-    uri = URI.parse("http://www.football.org.il/Components.asmx/  ?league_id=40&season_id=20&box=2&round_id=#{round_id.to_s}&playoffStarts=0&dataListBoxes=&language_id=-1")
+    uri = URI.parse("http://www.football.org.il/Components.asmx/League_AllTables?league_id=40&season_id=20&box=2&round_id=#{round_id.to_s}&playoffStarts=0&dataListBoxes=&language_id=-1")
     request = Net::HTTP::Get.new(uri)
     request["Pragma"] = "no-cache"
     request["Accept-Language"] = "en-US,en;q=0.9,he;q=0.8"
