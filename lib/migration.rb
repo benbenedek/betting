@@ -1,3 +1,5 @@
+require 'nokogumbo'
+
 module Migration
   extend self
   def get_team(team_name)
@@ -49,7 +51,10 @@ module Migration
     league = League.find_by_id(league_id)
     league_stats = get_round(fixture_round)
     Rails.logger.error "During migration got result #{league_stats}"
-    games_wrapper = league_stats.css('div[class="table_view full_view results-grid results-home teams-table league-games"]')
+    start_idx = league_stats.index("<HtmlData>")
+    html = league_stats[start_idx + "<HtmlData>".length, league_stats.index('</HtmlData>') - start_idx]
+    res = Nokogiri::HTML(html)
+    games_wrapper = res.css('div[class="table_view full_view results-grid results-home teams-table league-games"]')
     games = games_wrapper.css('a[class="table_row link_url"]')
     first_game = games.first
     fixture_date = first_game.children.first.children[1].text
@@ -84,33 +89,56 @@ module Migration
   end
 
   def get_round(round_id)
-    uri = URI.parse("http://www.football.org.il/Components.asmx/League_AllTables")
-    request = Net::HTTP::Post.new(uri)
-    request.content_type = "application/x-www-form-urlencoded; charset=UTF-8"
+    # uri = URI.parse("http://www.football.org.il/Components.asmx/League_AllTables")
+    # request = Net::HTTP::Post.new(uri)
+    # request.content_type = "application/x-www-form-urlencoded; charset=UTF-8"
+    # request["Pragma"] = "no-cache"
+    # request["Origin"] = "http://www.football.org.il"
+    # request["Accept-Language"] = "en-US,en;q=0.9,he;q=0.8"
+    # request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
+    # request["Accept"] = "*/*"
+    # request["Cache-Control"] = "no-cache"
+    # request["X-Requested-With"] = "XMLHttpRequest"
+    # request["Cookie"] = "__cfduid=d3ba9947f7d7836ed99d7bfb725f670671543780084; ASP.NET_SessionIdNew=cpsnusg0b5g042ua11vuy3vgx4sfhXX09k5ANP2wl3W2RoJqDe0=; _ga=GA1.3.914610362.1543780100; _gid=GA1.3.1487311413.1543780100; _fbp=fb.2.1543780100026.1384334042; __atuvc=3%7C49; __atuvs=5c0437077426432a002"
+    # request["Connection"] = "keep-alive"
+    # request["Referer"] = "http://www.football.org.il/leagues/league/?league_id=40&season_id=20"
+
+    # request.set_form_data({
+    #   "box" => "2",
+    #   "language" => "-1",
+    #   "league_id" => "40",
+    #   "round" => round_id.to_s,
+    #   "season_id" => "20",
+    #   "playoffStarts" => 0
+    # })
+
+    # req_options = { use_ssl: false }
+
+    # response = Net::HTTP.start(uri.hostname, uri.port, req_options) { |http| http.request(request) }
+
+    # Nokogiri::HTML(response.body)
+
+    uri = URI.parse("http://www.football.org.il/Components.asmx/  ?league_id=40&season_id=20&box=2&round_id=#{round_id.to_s}&playoffStarts=0&dataListBoxes=&language_id=-1")
+    request = Net::HTTP::Get.new(uri)
     request["Pragma"] = "no-cache"
-    request["Origin"] = "http://www.football.org.il"
     request["Accept-Language"] = "en-US,en;q=0.9,he;q=0.8"
-    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
+    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
     request["Accept"] = "*/*"
-    request["Cache-Control"] = "no-cache"
-    request["X-Requested-With"] = "XMLHttpRequest"
-    request["Cookie"] = "__cfduid=d3ba9947f7d7836ed99d7bfb725f670671543780084; ASP.NET_SessionIdNew=cpsnusg0b5g042ua11vuy3vgx4sfhXX09k5ANP2wl3W2RoJqDe0=; _ga=GA1.3.914610362.1543780100; _gid=GA1.3.1487311413.1543780100; _fbp=fb.2.1543780100026.1384334042; __atuvc=3%7C49; __atuvs=5c0437077426432a002"
-    request["Connection"] = "keep-alive"
     request["Referer"] = "http://www.football.org.il/leagues/league/?league_id=40&season_id=20"
+    request["X-Requested-With"] = "XMLHttpRequest"
+    request["Cookie"] = "__cfduid=d3ba9947f7d7836ed99d7bfb725f670671543780084; _ga=GA1.3.914610362.1543780100; ASP.NET_SessionIdNew=xjwgl4k0kxykrf3dydy1ynbr8K4O4GY0573zJ88/lenhk1gPEL4=; __cflb=482385597; _gid=GA1.3.444925445.1548948923; _fbp=fb.2.1548948922893.1517430204; __atuvc=3%7C5; __atuvs=5c5315ba23eaa131002"
+    request["Connection"] = "keep-alive"
+    request["Cache-Control"] = "no-cache"
 
-    request.set_form_data({
-      "box" => "10",
-      "language" => "-1",
-      "league_id" => "40",
-      "round" => round_id.to_s,
-      "season_id" => "20"
-    })
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
 
-    req_options = { use_ssl: false }
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
 
-    response = Net::HTTP.start(uri.hostname, uri.port, req_options) { |http| http.request(request) }
-
-    Nokogiri::HTML(response.body)
+    response.body.to_s
   end
 
   def get_league_stats(round = 1)

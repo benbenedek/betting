@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Used for html parsing
 gem 'nokogiri'
+gem 'nokogumbo'
 gem 'rest-client'
 
 gem 'tzinfo'
