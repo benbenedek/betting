@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-  get '/scores'                       => 'scores#scoretable', league_id: 2
+  get '/scores'                       => 'scores#scoretable', league_id: 3
   get '/scores/:league_id'            => 'scores#scoretable', as: 'scoretable'
   post "/place_bet/:match_bet_id"     => 'bets#place_bet', format: :js
   get "/:league_id/:number"           => 'bets#index', as: 'index'
