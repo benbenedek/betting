@@ -34,7 +34,7 @@ module Migration
   end
 
   def fetch_season(league_id, season_id)
-    new_league = League.create!(name: 'Ligat ha al', season: '2018/2019', id: 2)
+    new_league = League.create!(name: 'Ligat ha al', season: '2019/2020', id: 2)
 
     league_stats = Migration.get_league_stats
 
@@ -76,6 +76,10 @@ module Migration
         away_team_id = content['data-team2'].to_i
         home_team = Team.where(association_id: home_team_id).first
         away_team = Team.where(association_id: away_team_id).first
+        if (home_team.nil? || away_team.nil?) 
+          puts "We have an error!! #{home_team} (#{home_team_id}) - #{away_team} (#{away_team_id})"
+          return
+        end
 
         match = Match.where(fixture: fixture, home_team: home_team, away_team: away_team).first ||
           Match.new(fixture: fixture, home_team: home_team, away_team: away_team)
@@ -89,50 +93,27 @@ module Migration
   end
 
   def get_round(round_id)
-    # uri = URI.parse("http://www.football.org.il/Components.asmx/League_AllTables")
-    # request = Net::HTTP::Post.new(uri)
-    # request.content_type = "application/x-www-form-urlencoded; charset=UTF-8"
-    # request["Pragma"] = "no-cache"
-    # request["Origin"] = "http://www.football.org.il"
-    # request["Accept-Language"] = "en-US,en;q=0.9,he;q=0.8"
-    # request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"
-    # request["Accept"] = "*/*"
-    # request["Cache-Control"] = "no-cache"
-    # request["X-Requested-With"] = "XMLHttpRequest"
-    # request["Cookie"] = "__cfduid=d3ba9947f7d7836ed99d7bfb725f670671543780084; ASP.NET_SessionIdNew=cpsnusg0b5g042ua11vuy3vgx4sfhXX09k5ANP2wl3W2RoJqDe0=; _ga=GA1.3.914610362.1543780100; _gid=GA1.3.1487311413.1543780100; _fbp=fb.2.1543780100026.1384334042; __atuvc=3%7C49; __atuvs=5c0437077426432a002"
-    # request["Connection"] = "keep-alive"
-    # request["Referer"] = "http://www.football.org.il/leagues/league/?league_id=40&season_id=20"
-
-    # request.set_form_data({
-    #   "box" => "2",
-    #   "language" => "-1",
-    #   "league_id" => "40",
-    #   "round" => round_id.to_s,
-    #   "season_id" => "20",
-    #   "playoffStarts" => 0
-    # })
-
-    # req_options = { use_ssl: false }
-
-    # response = Net::HTTP.start(uri.hostname, uri.port, req_options) { |http| http.request(request) }
-
-    # Nokogiri::HTML(response.body)
-
-    uri = URI.parse("http://www.football.org.il/Components.asmx/League_AllTables?league_id=40&season_id=20&box=2&round_id=#{round_id.to_s}&playoffStarts=0&dataListBoxes=&language_id=-1")
+    uri = URI.parse("https://www.football.org.il//Components.asmx/League_AllTables?league_id=40&season_id=21&box=1&round_id=#{round_id.to_s}&playoffStarts=0&dataListBoxes=&language_id=-1")
     request = Net::HTTP::Get.new(uri)
     request["Pragma"] = "no-cache"
-    request["Accept-Language"] = "en-US,en;q=0.9,he;q=0.8"
-    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+    request["Cookie"] = "__cfduid=d687d9afa022d50031dd4ea1aaa5f32061566837965; __cflb=2770628362; _fbp=fb.2.1566837968731.359118293; ASP.NET_SessionIdNew=hpmrwrmumdj0uoigdwkh0irf3CTmshA0cXpTkurRITl0lvllhJI=; __atssc=google%3B1; __atuvc=6%7C35; __atuvs=5d640cd020b5064f005"
+    request["Accept-Language"] = "en-US,en;q=0.9,he-IL;q=0.8,he;q=0.7"
+    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+    request["Sec-Fetch-Mode"] = "cors"
     request["Accept"] = "*/*"
-    request["Referer"] = "http://www.football.org.il/leagues/league/?league_id=40&season_id=20"
-    request["X-Requested-With"] = "XMLHttpRequest"
-    request["Cookie"] = "__cfduid=d3ba9947f7d7836ed99d7bfb725f670671543780084; _ga=GA1.3.914610362.1543780100; ASP.NET_SessionIdNew=xjwgl4k0kxykrf3dydy1ynbr8K4O4GY0573zJ88/lenhk1gPEL4=; __cflb=482385597; _gid=GA1.3.444925445.1548948923; _fbp=fb.2.1548948922893.1517430204; __atuvc=3%7C5; __atuvs=5c5315ba23eaa131002"
-    request["Connection"] = "keep-alive"
     request["Cache-Control"] = "no-cache"
+    request["Authority"] = "www.football.org.il"
+    request["X-Requested-With"] = "XMLHttpRequest"
+    request["Sec-Fetch-Site"] = "same-origin"
+    request["Referer"] = "https://www.football.org.il/leagues/league/?league_id=40&season_id=21"
 
     req_options = {
       use_ssl: uri.scheme == "https",
     }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
 
     response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
       http.request(request)

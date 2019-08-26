@@ -45,6 +45,6 @@ class Fixture < ActiveRecord::Base
   end
 
   def can_still_bet_on_fixture?
-    default_timezone.now < last_bet_date
+    default_timezone.now < last_bet_date || (league_id.to_i == 3 && number.to_i == 1)
   end
 end
