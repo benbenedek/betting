@@ -35,6 +35,7 @@ gem 'rest-client'
 gem 'tzinfo'
 gem 'tzinfo-data'
 gem 'sprockets-rails'
+gem 'pg'
 
 
 # Use Unicorn as the app server
@@ -56,9 +57,7 @@ end
 gem 'sprockets_better_errors'
 
 group :production do
-  #For heroku deployment
   gem 'thin'
-  gem 'pg'
   gem 'rails_12factor'
 end
 

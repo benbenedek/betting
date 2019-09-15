@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+  echo "gcloud-sql-tunnel: missing instance name"
+  echo ""
+  echo "Run command 'gcloud-sql-tunnel <instance-name>'"
+  echo "<instance-name>: connection name of the Google Cloud SQL instance"
+  echo ""
+  echo "Environment variables:"
+  echo "  CREDENTIALS_FILE - credentials file for accessing Google Cloud SQL"
+  echo "  GCLOUD_SQL_TUNNEL_PORT - custom port of tunnel"
+  echo ""
+  echo "Commands:"
+  echo "  scripts/gcloud-sql-tunnel betting-prod:us-east1:database"
+  echo "  GCLOUD_SQL_TUNNEL_PORT=5678 scripts/gcloud-sql-tunnel betting-prod:us-east1:database"
+  exit 0
+fi
+
+command -v cloud_sql_proxy >/dev/null 2>&1 || {
+  echo >&2 "ERROR: cloud_sql_proxy was not found in PATH"
+  echo >&2 "You can install it from here - https://cloud.google.com/sql/docs/postgres/connect-external-app#proxy"
+  exit 2
+}
+
+INSTANCE_NAME=$1
+PROJECT_ID="betting-prod"
+
+CREDENTIALS_FILE="${CREDENTIALS_FILE:=`realpath ~/.gcloud/${PROJECT_ID}/credentials.json`}"
+GCLOUD_SQL_TUNNEL_PORT="${GCLOUD_SQL_TUNNEL_PORT:=-1}"
+DB_TIMEOUT="${DB_TIMEOUT:=10}"
+
+if [ ! -e "${CREDENTIALS_FILE}" ]; then
+  echo >&2 "Credentials file not found: $CREDENTIALS_FILE"
+  exit 4
+fi
+
+if [ $GCLOUD_SQL_TUNNEL_PORT -eq -1 ]; then
+  GCLOUD_SQL_TUNNEL_PORT=$(( $RANDOM + 32767 ))
+fi
+
+PID=-1
+
+function gcloud_sql_tunnel_open()
+{
+  nohup cloud_sql_proxy --instances=$INSTANCE_NAME=tcp:$GCLOUD_SQL_TUNNEL_PORT > /dev/null &
+  PID=$!
+  echo "Proxy running under PID: $PID on port $GCLOUD_SQL_TUNNEL_PORT"
+  sleep $DB_TIMEOUT # it can take few seconds on Linux OS
+}
+
+function gcloud_sql_tunnel_close()
+{
+  if [ $PID -eq -1 ]; then
+    echo >&2 "Connection was not yet established, so we have nothing to close"
+  else
+    kill -9 $PID
+    PID=-1
+    echo "Proxy closed under PID: $PID on port $GCLOUD_SQL_TUNNEL_PORT"
+  fi
+}

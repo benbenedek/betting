@@ -1,0 +1,42 @@
+kind: Deployment
+apiVersion: "extensions/v1beta1"
+metadata:
+  name: betting-server-prod
+spec:
+  replicas: 1
+  revisionHistoryLimit: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 30
+  template:
+    metadata:
+      labels:
+        app: betting-server
+        version: "1.0"
+    spec:
+      containers:
+      - image: us.gcr.io/betting-prod/betting-server:1568462863
+        name: betting-server
+        ports:
+        - name: service-port
+          containerPort: 1234
+        resources:
+          requests:
+            memory: 250Mi
+          limits:
+            memory: 1024Mi
+        env:
+        - name: BF_SERVICE_NAME
+          value: betting-server
+        - name: RAILS_ENV
+          value: production
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: url
+        - name: SECRET_KEY_BASE
+          value: "testJasfjn19anv91afnaf#8124!rF8V"
