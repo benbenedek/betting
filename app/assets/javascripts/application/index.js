@@ -31,6 +31,16 @@
     }
   }
 
+  function togglePreviousGames() {
+    var $this = $(this);
+    // $this will contain a reference to the checkbox
+    if ($this.is(':checked')) {
+      $(".previous_games").removeClass("hidden");
+    } else {
+      $(".previous_games").addClass("hidden");
+    }
+  }
+
   function readyOnce() {
     $('.loader-ajax-link').bind('ajax:beforeSend', function(evt, data, status, xhr){
       NProgress.start();
@@ -44,6 +54,7 @@
   function readyAgain(){
     $(".js-bet-click").click(placeBet);
     $(".show-other-bets").click(toggleBets);
+    $(".show-previous-games").click(togglePreviousGames);
     $(document).on('page:fetch',   function() { NProgress.start(); });
     $(document).on('page:change',  function() { NProgress.done(); });
     $(document).on('page:restore', function() { NProgress.remove(); });

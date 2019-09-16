@@ -17,4 +17,25 @@
   </td>
   <%= render partial: 'single_match_bet', locals: { match_bet: bet_for_match, match: match } %>
   </tr>
+  
+  <% previous.each do |previous_game| %>
+  <tr class="previous_games hidden">
+    <td class="hidden-sm hidden-xs">
+      <%= previous_game.pretty_date %>
+    </td>
+    <td>
+      <%= previous_game.home_info %>
+    </td>
+    <td>
+      -
+    </td>
+    <td>
+      <%= previous_game.away_info %>
+    </td>
+    <td>
+      <%= previous_game.score %> (<%= previous_game.bet_score %>)
+    </td>
+  </tr>
+  <% end %>
+  
 </div>

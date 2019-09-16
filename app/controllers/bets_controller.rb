@@ -18,7 +18,7 @@ class BetsController < ApplicationController
         end
       end
     end
-
+    @previous_matches = @fixture.get_previous_scores
     @user_fixture_bet = @fixture.get_fixture_bet_for_user(current_user)
   end
 
