@@ -51,11 +51,8 @@ class Fixture < ActiveRecord::Base
   def get_previous_scores
     previous_matches = {}
     matches.each do |match|
-      previous_matches[match.id] ||= []
-      previous_matches[match.id].concat(Match.where(home_team_id: match.home_team_id, away_team_id: match.away_team_id).where.not(score: [nil, ""], date: nil, id: match.id).where("date < ?", match.date).order('date DESC').includes(:away_team, :home_team))
-      previous_matches[match.id].concat(Match.where(home_team_id: match.away_team_id, away_team_id: match.home_team_id).where.not(score: [nil, ""], date: nil, id: match.id).where("date < ?", match.date).order('date DESC').includes(:away_team, :home_team))
+      previous_matches[match.id] = Match.where("(home_team_id = ? AND away_team_id = ?) OR (away_team_id = ? AND home_team_id = ?)", match.away_team_id, match.home_team_id, match.away_team_id, match.home_team_id).where.not(score: [nil, ""], date: nil, id: match.id).where("date < ?", match.date).order('date DESC').includes(:away_team, :home_team)
     end
-    p "previous_matches #{previous_matches}"
     previous_matches
   end
 end
