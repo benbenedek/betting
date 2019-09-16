@@ -6,11 +6,14 @@
   <h1>מחזור כדורגל <%= fixture.number %></h1> <span id='leftover-time'></div>
 
   <%= render partial: 'all_matches', locals: {matches: fixture.matches, fixture_bet_for_user: @user_fixture_bet}  %>
-  <div class="checkbox">
-    <label>
-      <input align="right" class="show-other-bets" type="checkbox"> תראה את ההימורים של כולם
-    </label>
-  </div>
+  
+  <% unless fixture.can_still_bet_on_fixture? %>
+    <div class="checkbox">
+      <label>
+        <input align="right" class="show-other-bets" type="checkbox"> תראה את ההימורים של כולם
+      </label>
+    </div>
+  <% end %>
   </br>
   <div class='row'>
     <div class='col-md-2'>
