@@ -8,6 +8,7 @@ class BetsController < ApplicationController
     return unless @fixture.present?
 
     Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 1.hours) do
+      return nil if @fixture.can_still_bet_on_fixture?
       if @fixture.all_games_dont_hava_scores?
         begin
           Migration.fetch_fixture(@fixture.league_id, @fixture.number)
