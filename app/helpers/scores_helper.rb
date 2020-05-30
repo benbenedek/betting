@@ -1,4 +1,29 @@
+require 'CSV'
 module ScoresHelper
+  
+  def get_score_table_csv(league_id)
+    fixtures = Fixture.where(league_id: league_id).sort_by(&:number)
+
+    CSV.generate(headers: true) do |csv|
+      csv << ["match_id", "bet_id", "fixture_bet_id", "user", "fixture_number", "home_team", "away_team", "prediction", "actual_result", "bet_correctly"]
+      User.all.each { |user|
+        total_success = 0
+        total_games = 0
+        fixtures.each { |fixture|
+          next unless fixture.has_any_scores?
+          fb = fixture.get_fixture_bet
+          user_fixture_bet = fb.get_fixture_bet_for_user(user, fixture.matches)
+          success_count = 0
+          user_fixture_bet.bets.each { |bet| 
+            next if bet.match.score.nil?
+            next if fixture.id != bet.match.fixture_id
+            csv << [bet.match.id, bet.id, fb.id, user.name, fixture.number, bet.match.home_info, bet.match.away_info, bet.prediction, bet.match.bet_score, bet.prediction.eql?(bet.match.bet_score)]
+          }
+        }
+      }
+    end
+  end
+
   def get_score_table(league_id)
     results = { table_head: ["משתמש/מחזור"], res: {} }
     fixtures = Fixture.where(league_id: league_id).sort_by(&:number)
@@ -18,7 +43,11 @@ module ScoresHelper
         fb = fixture.get_fixture_bet
         user_fixture_bet = fb.get_fixture_bet_for_user(user, fixture.matches)
         success_count = 0
-        user_fixture_bet.bets.each { |bet| success_count += 1 if bet.prediction.eql?(bet.match.bet_score) }
+        user_fixture_bet.bets.each { |bet| 
+          next if bet.match.score.nil?
+          next if fixture.id != bet.match.fixture_id
+          success_count += 1 if bet.prediction.eql?(bet.match.bet_score) 
+        }
         results[:res][user.name][fixture.number.to_s] = {}
         results[:res][user.name][fixture.number.to_s][:games] = user_fixture_bet.bets.count
         results[:res][user.name][fixture.number.to_s][:success] = success_count

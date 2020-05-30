@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/scores'                       => 'scores#scoretable', league_id: 3
   get '/scores/:league_id'            => 'scores#scoretable', as: 'scoretable'
+  get '/scorescsv/:league_id'         => 'scores#scoretablecsv', as: 'scoretablecsv'
   post "/place_bet/:match_bet_id"     => 'bets#place_bet', format: :js
   get "/:league_id/:number"           => 'bets#index', as: 'index'
 
