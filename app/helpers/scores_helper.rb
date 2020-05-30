@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 module ScoresHelper
   
   def get_score_table_csv(league_id)
