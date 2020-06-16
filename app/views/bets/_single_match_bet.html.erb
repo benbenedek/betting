@@ -1,5 +1,5 @@
 <% prediction = match_bet.prediction %>
-<% if @fixture.can_still_bet_on_fixture? %>
+<% if match.can_still_bet_on_match? %>
 <td>
 <div class="btn-group" data-toggle="buttons">
   <label match_bet_id="<%= match_bet.id %>" option="1" class="btn btn-primary btn-xs js-bet-click <%= 'active' if prediction.eql?('1') %>">
@@ -16,7 +16,7 @@
 <% else %>
   <td class="<%= match.bet_score == prediction ? "success" : "info" %>"><%= prediction %></td>
 <% end %>
-<% unless @fixture.can_still_bet_on_fixture? %>
+<% unless match.can_still_bet_on_match? %>
   <% User.where("id <> #{current_user.id}").order(:id).each {|user| %>
     <% fb = @fixture.get_fixture_bet_for_user(user) %>
     <% bet = fb.bets.where("match_id = #{match.id}").first %>

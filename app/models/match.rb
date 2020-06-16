@@ -34,6 +34,18 @@ class Match < ActiveRecord::Base
     self.date.strftime("%d/%m/%Y")
   end
 
+  def default_timezone
+    TZInfo::Timezone.get('Asia/Jerusalem')
+  end
+
+  def last_bet_date
+    (date - 3.hours).in_time_zone(default_timezone)
+  end
+
+  def can_still_bet_on_match?
+    default_timezone.now < last_bet_date
+  end
+
   private
 
   def home_team_score
