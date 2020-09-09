@@ -93,7 +93,7 @@ module Migration
   end
 
   def get_round(round_id)
-    uri = URI.parse("https://www.football.org.il//Components.asmx/League_AllTables?league_id=40&season_id=21&box=1&round_id=#{round_id.to_s}&playoffStarts=0&dataListBoxes=&language_id=-1")
+    uri = URI.parse("https://www.football.org.il//Components.asmx/League_AllTables?league_id=40&season_id=22&box=1&round_id=#{round_id.to_s}&playoffStarts=0&dataListBoxes=&language_id=-1")
     request = Net::HTTP::Get.new(uri)
     request["Pragma"] = "no-cache"
     request["Cookie"] = "__cfduid=d687d9afa022d50031dd4ea1aaa5f32061566837965; __cflb=2770628362; _fbp=fb.2.1566837968731.359118293; ASP.NET_SessionIdNew=hpmrwrmumdj0uoigdwkh0irf3CTmshA0cXpTkurRITl0lvllhJI=; __atssc=google%3B1; __atuvc=6%7C35; __atuvs=5d640cd020b5064f005"
@@ -105,7 +105,7 @@ module Migration
     request["Authority"] = "www.football.org.il"
     request["X-Requested-With"] = "XMLHttpRequest"
     request["Sec-Fetch-Site"] = "same-origin"
-    request["Referer"] = "https://www.football.org.il/leagues/league/?league_id=40&season_id=21"
+    request["Referer"] = "https://www.football.org.il/leagues/league/?league_id=40&season_id=22"
 
     req_options = {
       use_ssl: uri.scheme == "https",

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-  get '/scores'                       => 'scores#scoretable', league_id: 4
+  get '/scores'                       => 'scores#scoretable', league_id: 5
   get '/scores/:league_id'            => 'scores#scoretable', as: 'scoretable'
   get '/scorescsv/:league_id'         => 'scores#scoretablecsv', as: 'scoretablecsv'
   post "/place_bet/:match_bet_id"     => 'bets#place_bet', format: :js
