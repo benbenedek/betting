@@ -45,7 +45,7 @@ class Fixture < ActiveRecord::Base
   end
 
   def can_still_bet_on_fixture?
-    default_timezone.now < last_bet_date || self.number == 18
+    default_timezone.now < last_bet_date
   end
 
   def get_previous_scores
