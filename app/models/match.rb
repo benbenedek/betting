@@ -43,7 +43,7 @@ class Match < ActiveRecord::Base
   end
 
   def can_still_bet_on_match?
-    default_timezone.now < last_bet_date
+    default_timezone.now < last_bet_date || self.fixture.is_open
   end
 
   private
