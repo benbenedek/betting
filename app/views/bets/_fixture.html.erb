@@ -1,7 +1,6 @@
 <script>
   document.lastBetDate = <%= fixture.seconds_left_to_bet %>;
 </script>
-
 <div align="right">
   <h1>מחזור כדורגל <%= fixture.number %></h1> <span id='leftover-time'></div>
 
@@ -34,7 +33,16 @@
         <% } %>
       </ul>
     </div>
-
   </div>
+
+      <div>
+        <% if current_user.name == 'בן' %>
+          <% if fixture.is_open %>
+            <%= link_to "סגור מחזור", open_close_path(league_id: fixture.league_id, number: fixture.number, should_open: false) %>
+          <% else %>
+            <%= link_to "פתח מחזור", open_close_path(league_id: fixture.league_id, number: fixture.number, should_open: true) %>
+          <% end %>
+        <% end %>
+    </div>
 </div>
 <br/><br/>

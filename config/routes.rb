@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post "/place_bet/:match_bet_id"     => 'bets#place_bet', format: :js
   get "/:league_id/:number"           => 'bets#index', as: 'index'
 
+  get "/:league_id/:number/:should_open"  => 'bets#open_close', as: 'open_close'
+
   root 'bets#index'
 
 end

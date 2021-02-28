@@ -40,4 +40,12 @@ class BetsController < ApplicationController
     bet.save
     render status: 200, nothing: true
   end
+
+  def open_close
+    @fixture = Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).first
+    return unless @fixture.present?
+
+    @fixture.is_open = params[:should_open]
+    @fixture.save!
+  end
 end
