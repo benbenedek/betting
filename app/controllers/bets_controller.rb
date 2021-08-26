@@ -47,5 +47,6 @@ class BetsController < ApplicationController
 
     @fixture.is_open = params[:should_open]
     @fixture.save!
+    redirect_to root_path
   end
 end
