@@ -13,7 +13,7 @@
   </thead>
   <tbody>
   <% matches.each { |match| %>
-    <%= render partial: 'single_match', locals: {match: match, previous: previous[match.id], bet_for_match: fixture_bet_for_user.bets.where("match_id = #{match.id}").first}  %>
+    <%= render partial: 'single_match', locals: {match: match, previous: previous[match.id], bet_for_match: fixture_bet_for_user.bets.where("match_id = #{match.id}").first || Bet.new}  %>
   <% } %>
   </tbody>
   </table>
