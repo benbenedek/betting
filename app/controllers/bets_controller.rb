@@ -57,13 +57,13 @@ class BetsController < ApplicationController
 
   def fetch_fixture_cached(league_id, fixture_number)
     if fixture_number.present?
-      # Rails.cache.fetch("fixture_#{@league_id}_#{fixture_number}", :expires_in => 3.hours) do
+      Rails.cache.fetch("fixture_#{@league_id}_#{fixture_number}", :expires_in => 3.hours) do
         Fixture.where(league_id: league_id.to_i, number: fixture_number.to_i).includes({ :matches => [:away_team, :home_team]}).first
-      # end
+      end
     else
-      # Rails.cache.fetch("current_fixture", :expires_in => 3.hours) do
+      Rails.cache.fetch("current_fixture", :expires_in => 3.hours) do
         Fixture.get_upcoming_fixture
-      # end
+      end
     end
   end
 end
