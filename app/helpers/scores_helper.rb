@@ -26,7 +26,7 @@ module ScoresHelper
 
   def get_score_table(league_id)
     results = { table_head: ["משתמש/מחזור"], res: {} }
-    fixtures = Fixture.where(league_id: league_id).sort_by(&:number)
+    fixtures = Fixture.includes([:matches]).where(league_id: league_id).sort_by(&:number)
 
     fixtures.each { |fixture|
       next unless fixture.has_any_scores?
@@ -43,7 +43,7 @@ module ScoresHelper
         fb = fixture.get_fixture_bet
         user_fixture_bet = fb.get_fixture_bet_for_user(user, fixture.matches)
         success_count = 0
-        user_fixture_bet.bets.each { |bet| 
+        user_fixture_bet.bets.includes(:match).each { |bet| 
           next if bet.match.score.nil?
           next if fixture.id != bet.match.fixture_id
           success_count += 1 if bet.prediction.eql?(bet.match.bet_score) 
