@@ -3,10 +3,11 @@ require 'migration'
 class Fixture < ActiveRecord::Base
   belongs_to :league
   has_many :matches
+  has_many :fixture_bets
 
   def self.get_upcoming_fixture
     current_date = DateTime.now
-    Fixture.where("date >= '#{current_date - 3.days}'").includes(:matches).first
+    Fixture.where("date >= '#{current_date - 3.days}'").includes(:matches, :fixture_bets).first
   end
 
   def find_game_by(home_team, away_team)

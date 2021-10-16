@@ -1,9 +1,11 @@
 class BetsController < ApplicationController
   def index
     redirect_to login_path and return unless logged_in?
-    @fixture = params[:number].present? ?
-      Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).includes(:matches).first :
-      Fixture.get_upcoming_fixture
+    # @fixture = params[:number].present? ?
+    #   Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).includes(:matches, :fixture_bets).first :
+    #   Fixture.get_upcoming_fixture
+
+    @fixture = fetch_fixture_cached(params[:league_id], params[:number])
 
     return unless @fixture.present?
 
@@ -49,5 +51,17 @@ class BetsController < ApplicationController
     @fixture.is_open = params[:should_open]
     @fixture.save!
     redirect_to root_path
+  end
+
+  def fetch_fixture_cached(league_id, fixture_number)
+    if fixture_number.present?
+      Rails.cache.fetch("fixture_#{@league_id}_#{fixture_number}", :expires_in => 30.minutes) do
+        Fixture.where(league_id: league_id.to_i, number: fixture_number.to_i).includes(:matches, :fixture_bets).first
+      end
+    else
+      Rails.cache.fetch("current_fixture", :expires_in => 30.minutes) do
+        Fixture.get_upcoming_fixture
+      end
+    end
   end
 end
