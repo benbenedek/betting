@@ -7,7 +7,7 @@ class Fixture < ActiveRecord::Base
 
   def self.get_upcoming_fixture
     current_date = DateTime.now
-    Fixture.where("date >= '#{current_date - 3.days}'").includes(:matches, :fixture_bets).first
+    Fixture.where("date >= '#{current_date - 3.days}'").includes({ :matches => [:away_team, :home_team]}).first
   end
 
   def find_game_by(home_team, away_team)
@@ -23,7 +23,7 @@ class Fixture < ActiveRecord::Base
   end
 
   def get_fixture_bet
-    FixtureBet.where(fixture_id: self.id).includes(:user_bets).first || FixtureBet.create({ fixture_id: self.id })
+    FixtureBet.where(fixture_id: self.id).first || FixtureBet.create({ fixture_id: self.id })
   end
 
   def get_fixture_bet_for_user(user)
@@ -52,7 +52,7 @@ class Fixture < ActiveRecord::Base
   def get_previous_scores
     previous_matches = {}
     matches.each do |match|
-      previous_matches[match.id] = Match.where("(home_team_id = ? AND away_team_id = ?) OR (away_team_id = ? AND home_team_id = ?)", match.away_team_id, match.home_team_id, match.away_team_id, match.home_team_id).where.not(score: [nil, ""], date: nil, id: match.id).where("date < ?", match.date).order('date DESC').includes(:away_team, :home_team)
+      previous_matches[match.id] = Match.includes(:away_team, :home_team).where("(home_team_id = ? AND away_team_id = ?) OR (away_team_id = ? AND home_team_id = ?)", match.away_team_id, match.home_team_id, match.away_team_id, match.home_team_id).where.not(score: [nil, ""], date: nil, id: match.id).where("date < ?", match.date).order('date DESC')
     end
     previous_matches
   end

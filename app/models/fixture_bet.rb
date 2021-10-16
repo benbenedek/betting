@@ -5,7 +5,7 @@ class FixtureBet < ActiveRecord::Base
 
   def get_fixture_bet_for_user(user, matches)
     return nil if user.nil?
-    current_user_betting = user_bets.where("user_id = #{user.id}").includes(:bets).first
+    current_user_betting = user_bets.where("user_id = #{user.id}").first
     return current_user_betting if current_user_betting.present?
 
     current_user_bets = user_bets.build({ user_id: user.id })
