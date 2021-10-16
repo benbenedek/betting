@@ -13,7 +13,7 @@ class BetsController < ApplicationController
       end
       if @fixture.all_games_dont_hava_scores?
         begin
-          Migration.fetch_fixture(@fixture.league_id, @fixture.number)
+          Migration.delay.fetch_fixture(@fixture.league_id, @fixture.number)
           @fixture.reload
         rescue => e
           Rails.logger.error "Got error #{e}\n#{e.backtrace}"

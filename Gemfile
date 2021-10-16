@@ -37,6 +37,8 @@ gem 'tzinfo-data'
 gem 'sprockets-rails'
 gem 'pg'
 
+gem 'delayed_job_active_record'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
