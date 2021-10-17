@@ -9,7 +9,7 @@ class BetsController < ApplicationController
 
     return unless @fixture.present?
 
-    Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 3.hours) do
+    Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 1.hours) do
       if @fixture.can_still_bet_on_fixture?
         break
       end
