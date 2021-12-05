@@ -9,6 +9,10 @@ class BetsController < ApplicationController
 
     return unless @fixture.present?
 
+    if params[:nuke].present? && params[:nuke].to_s == '1' && current_user.name == 'בן'
+      Rails.cache.clear
+    end
+
     Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 1.hours) do
       if @fixture.can_still_bet_on_fixture?
         break
@@ -47,11 +51,14 @@ class BetsController < ApplicationController
   end
 
   def open_close
-    @fixture = Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).first
-    return unless @fixture.present?
+    if current_user.name == 'בן'
+      @fixture = Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).first
+      return unless @fixture.present?
 
-    @fixture.is_open = params[:should_open]
-    @fixture.save!
+      @fixture.is_open = params[:should_open]
+      @fixture.save!
+      Rails.cache.clear
+    end
     redirect_to root_path
   end
 
