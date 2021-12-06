@@ -5,5 +5,9 @@
 <% else %>
   <div class="fixture" align="right">
     שמע אין מחזור כזה בינתיים... באסה
+
+    <% if current_user.is_ben? %>
+    	<br><%= link_to "הרץ מיגרציה", run_migration_path(league_id: params[:league_id], number: params[:number]) %>
+	<% end %>
   </div>
 <% end %>

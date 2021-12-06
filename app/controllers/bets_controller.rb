@@ -1,3 +1,5 @@
+require_relative '../../lib/migration'
+
 class BetsController < ApplicationController
   def index
     redirect_to login_path and return unless logged_in?
@@ -9,7 +11,7 @@ class BetsController < ApplicationController
 
     return unless @fixture.present?
 
-    if params[:nuke].present? && params[:nuke].to_s == '1' && current_user.name == 'בן'
+    if params[:nuke].present? && params[:nuke].to_s == '1' && current_user.is_ben?
       Rails.cache.clear
     end
 
@@ -51,7 +53,7 @@ class BetsController < ApplicationController
   end
 
   def open_close
-    if current_user.name == 'בן'
+    if current_user.is_ben?
       @fixture = Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).first
       return unless @fixture.present?
 
@@ -59,7 +61,7 @@ class BetsController < ApplicationController
       @fixture.save!
       Rails.cache.clear
     end
-    redirect_to root_path
+    redirect_to index_path(league_id: params[:league_id].to_i, number: params[:number].to_i)
   end
 
   def fetch_fixture_cached(league_id, fixture_number)
@@ -73,4 +75,13 @@ class BetsController < ApplicationController
       end
     end
   end
+
+  def run_migration
+    if current_user.is_ben?
+      Migration.fetch_fixture(params[:league_id].to_i, params[:number].to_i)
+      Rails.cache.clear
+    end
+    redirect_to index_path(league_id: params[:league_id].to_i, number: params[:number].to_i)
+  end
+
 end

@@ -36,7 +36,7 @@
   </div>
 
       <div>
-        <% if current_user.name == 'בן' %>
+        <% if current_user.is_ben? %>
           <% if fixture.is_open %>
             <%= link_to "סגור מחזור", open_close_path(league_id: fixture.league_id, number: fixture.number, should_open: 'false') %>
           <% else %>
