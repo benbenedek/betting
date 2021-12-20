@@ -15,7 +15,7 @@ class BetsController < ApplicationController
       Rails.cache.clear
     end
 
-    Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 1.hours) do
+    Rails.cache.fetch("hourly_migration_fixture_#{@fixture.id}", :expires_in => 6.hours) do
       if @fixture.can_still_bet_on_fixture?
         break
       end

@@ -4,7 +4,7 @@
 rails server -b 0.0.0.0 &
   
 # Start the async job processor
-SLEEP_DELAY=3600 rake jobs:work &
+SLEEP_DELAY=21600 rake jobs:work &
   
 # Wait for any process to exit
 wait -n
