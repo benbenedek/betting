@@ -1,4 +1,6 @@
+require_relative '../request_logger'
 Rails.application.configure do
+  config.middleware.use 'RequestLogger'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

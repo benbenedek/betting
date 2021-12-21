@@ -1,4 +1,7 @@
+require_relative '../request_logger'
+
 Rails.application.configure do
+  config.middleware.use 'RequestLogger'
   config.cache_classes = true
   config.eager_load = true
   config.consider_all_requests_local       = false
