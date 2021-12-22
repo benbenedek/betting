@@ -10,4 +10,4 @@ COPY . /myapp
 RUN bundle exec rake assets:precompile
 EXPOSE 3000
 # Start the main process.
-CMD ["./run_script.sh"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
