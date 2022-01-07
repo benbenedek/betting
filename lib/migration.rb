@@ -55,7 +55,7 @@ module Migration
     html = league_stats_str[start_idx, league_stats_str.index('</HtmlData>') - start_idx]
     res = Nokogiri::HTML(CGI.unescapeHTML("&lt;html&gt;&lt;body&gt;#{html}&lt;/body&gt;&lt;/html&gt;"))
     games_wrapper = res.css('div[class="table_view full_view results-grid results-home teams-table league-games"]')
-    games = games_wrapper.css('a[class="table_row link_url"]')
+    games = games_wrapper.css('div[class="table_row"]')
     first_game = games.first
     fixture_date = first_game.children.first.children[1].text
     parsed_fixture_date = DateTime.parse(fixture_date, '%d/%m/%Y')
@@ -87,6 +87,7 @@ module Migration
         match.date = game_date
         match.score = score
         match.save!
+        # p match
     end
     fixture.date = parsed_fixture_date
     fixture.save!
