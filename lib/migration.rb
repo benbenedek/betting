@@ -97,27 +97,26 @@ module Migration
   end
 
   def get_round(round_id)
-    uri = URI.parse("https://www.football.org.il//Components.asmx/League_AllTables?league_id=40&season_id=23&box=1&round_id=#{round_id.to_s}&playoffStarts=0&dataListBoxes=&language_id=-1")
+    uri = URI.parse("https://www.football.org.il//Components.asmx/League_AllTables?league_id=40&season_id=23&box=0&round_id=#{round_id.to_s}")
     request = Net::HTTP::Get.new(uri)
-    request["Pragma"] = "no-cache"
-    request["Cookie"] = "__cfduid=d687d9afa022d50031dd4ea1aaa5f32061566837965; __cflb=2770628362; _fbp=fb.2.1566837968731.359118293; ASP.NET_SessionIdNew=hpmrwrmumdj0uoigdwkh0irf3CTmshA0cXpTkurRITl0lvllhJI=; __atssc=google%3B1; __atuvc=6%7C35; __atuvs=5d640cd020b5064f005"
-    request["Accept-Language"] = "en-US,en;q=0.9,he-IL;q=0.8,he;q=0.7"
-    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
-    request["Sec-Fetch-Mode"] = "cors"
-    request["Accept"] = "*/*"
-    request["Cache-Control"] = "no-cache"
     request["Authority"] = "www.football.org.il"
+    request["Pragma"] = "no-cache"
+    request["Cache-Control"] = "no-cache"
+    request["Sec-Ch-Ua"] = "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"98\", \"Google Chrome\";v=\"98\""
+    request["Accept"] = "*/*"
     request["X-Requested-With"] = "XMLHttpRequest"
+    request["Sec-Ch-Ua-Mobile"] = "?0"
+    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36"
+    request["Sec-Ch-Ua-Platform"] = "\"macOS\""
     request["Sec-Fetch-Site"] = "same-origin"
+    request["Sec-Fetch-Mode"] = "cors"
+    request["Sec-Fetch-Dest"] = "empty"
     request["Referer"] = "https://www.football.org.il/leagues/league/?league_id=40&season_id=23"
+    request["Accept-Language"] = "en-US,en;q=0.9,he-IL;q=0.8,he;q=0.7"
 
     req_options = {
       use_ssl: uri.scheme == "https",
     }
-
-    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-      http.request(request)
-    end
 
     response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
       http.request(request)
