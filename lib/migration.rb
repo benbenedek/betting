@@ -8,48 +8,9 @@ module Migration
     team
   end
 
-  def run_migration
-    league = League.find_by_name("Ligat ha al")
-    (27..36).each { |idx|
-      page_url = "http://football.org.il/Leagues/Pages/FullRoundGamesList.aspx?team_id=%D7%9B%D7%9C%20%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA&round_number=#{idx}&league_id=-1"
-      page = Nokogiri::HTML(RestClient.get(page_url))
-      fixture = Fixture.create({number: idx})
-      games_trs = page.css("tr[class='BDCItemStyle']") + page.css("tr[class='BDCItemAlternateStyle']")
-      fixture_date = nil
-      games_trs.each { |game_tr|
-        date_str = game_tr.css("td[class='BDCItemText']")[1].text
-        sp_date = date_str.split("/")
-        sp_date[2] = "20" + sp_date[2]
-        fixed_string = sp_date.join("-")
-        p fixed_string
-        fixture_date = DateTime.parse(fixed_string, '%d-%m-%Y')  if fixture_date.nil?
-        home_team = get_team(game_tr.css("td[class='BDCItemText']")[2].css("a[class='BDCItemLink']")[0].text)
-        away_team = get_team(game_tr.css("td[class='BDCItemText']")[2].css("a[class='BDCItemLink']")[1].text)
-        fixture.matches.build({home_team: home_team, away_team: away_team})
-      }
-      fixture.date = fixture_date
-      league.fixtures.push(fixture)
-      league.save
-    }
-  end
-
-  def fetch_season(league_id, season_id)
-    new_league = League.create!(name: 'Ligat ha al', season: '2019/2020', id: 2)
-
-    league_stats = Migration.get_league_stats
-
-    teams = league_stats.css('div[class="league-table table-w-playoff"]').css('section[class="playoff-container"]').css('a')
-
-    teams.each do |team|
-      team_name = team.css('[class="table_col align_content team_name"]').children.last.text
-      team_id = team.to_h['href'].split('team_id=').second.to_i
-      Team.create!(name: team_name, association_id: team_id)
-    end
-  end
-
   def fetch_fixture(league_id, fixture_round)
     league = League.find_by_id(league_id)
-    league_stats_str = get_round(fixture_round)
+    league_stats_str = get_round(league.association_id ,fixture_round)
     Rails.logger.error "During migration got result #{league_stats_str}"
     start_idx = league_stats_str.index("<HtmlData>") + "<HtmlData>".length
     html = league_stats_str[start_idx, league_stats_str.index('</HtmlData>') - start_idx]
@@ -96,8 +57,8 @@ module Migration
     fixture.save!
   end
 
-  def get_round(round_id)
-    uri = URI.parse("https://www.football.org.il//Components.asmx/League_AllTables?league_id=40&season_id=23&box=0&round_id=#{round_id.to_s}")
+  def get_round(association_season_id,round_id)
+    uri = URI.parse("https://www.football.org.il//Components.asmx/League_AllTables?league_id=40&season_id=#{association_season_id}&box=0&round_id=#{round_id.to_s}")
     request = Net::HTTP::Get.new(uri)
     request["Authority"] = "www.football.org.il"
     request["Pragma"] = "no-cache"
@@ -111,7 +72,7 @@ module Migration
     request["Sec-Fetch-Site"] = "same-origin"
     request["Sec-Fetch-Mode"] = "cors"
     request["Sec-Fetch-Dest"] = "empty"
-    request["Referer"] = "https://www.football.org.il/leagues/league/?league_id=40&season_id=23"
+    request["Referer"] = "https://www.football.org.il/leagues/league/?league_id=40&season_id=#{association_season_id}"
     request["Accept-Language"] = "en-US,en;q=0.9,he-IL;q=0.8,he;q=0.7"
 
     req_options = {
