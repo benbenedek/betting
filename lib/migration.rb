@@ -115,4 +115,26 @@ module Migration
 
     Nokogiri::HTML(response.body)
   end
+
+  def delete_fixture(fixture_id)
+    fixture = Fixture.find(fixture_id)
+    fixture.destroy!
+    fixture_bet = FixtureBet.where(fixture: fixture)
+    fixture_bet.each do |curr_fixture_bet| 
+      user_bets = UserBet.where(fixture_bet: curr_fixture_bet)
+      user_bets.each do |curr_user_bet|
+        curr_user_bet.destroy!
+      end
+      curr_fixture_bet.destroy!
+    end
+
+    matches = Match.where(fixture: fixture)
+    matches.each do |match|
+      bets = Bet.where(match: match)
+      bets.each do |curr_bet|
+        curr_bet.destroy!
+      end
+      match.destroy!
+    end
+  end
 end
