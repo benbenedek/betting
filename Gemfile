@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', :group => [:development, :test]
 # Use SCSS for stylesheets
@@ -11,9 +11,8 @@ gem 'sass-rails', '4.0.2'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
 gem 'bootstrap-sass',       '3.2.0.4'
-
+gem 'activerecord', '4.2.6'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
@@ -46,7 +45,7 @@ gem 'pg'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  # gem 'byebug'
 end
 
 group :development do
@@ -57,7 +56,7 @@ end
 gem 'sprockets_better_errors'
 
 group :production do
-  gem 'thin'
+  gem 'thin', '1.8.0'
   gem 'rails_12factor'
 end
 
