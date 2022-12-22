@@ -34,8 +34,7 @@ gem 'rest-client'
 gem 'tzinfo'
 gem 'tzinfo-data'
 gem 'sprockets-rails'
-gem 'pg'
-
+gem 'pg', '~> 0.20'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -87,7 +87,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     nokogumbo (2.0.5)
       nokogiri (~> 1.8, >= 1.8.4)
-    pg (1.2.3)
+    pg (0.21.0)
     rack (1.6.13)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -185,7 +185,7 @@ DEPENDENCIES
   jquery-turbolinks
   nokogiri
   nokogumbo
-  pg
+  pg (~> 0.20)
   rails (= 4.2.6)
   rails_12factor
   rest-client

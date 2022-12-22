@@ -83,7 +83,9 @@ function step_prepare_docker_image {
   echo
   (
     docker build -t $tag -f $dockerfile . && \
-    gcloud docker -- push $tag
+    echo $tag && \
+    docker push $tag
+    #gcloud docker -- push $tag
   ) || error 12
   echo
 }
