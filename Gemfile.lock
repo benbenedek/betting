@@ -37,11 +37,14 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.4)
+    autoprefixer-rails (9.8.6)
+      execjs
     bcrypt (3.1.18)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.2.0.4)
-      sass (~> 3.2)
+    bootstrap-sass (3.4.1)
+      autoprefixer-rails (>= 5.2.1)
+      sassc (>= 2.0.0)
     builder (3.2.4)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
@@ -52,6 +55,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.7)
     execjs (2.8.1)
+    ffi (1.15.5)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hike (1.2.3)
@@ -133,6 +137,8 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0.0)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -179,7 +185,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (= 4.2.6)
   bcrypt (~> 3.1.7)
-  bootstrap-sass (= 3.2.0.4)
+  bootstrap-sass (= 3.4.1)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
