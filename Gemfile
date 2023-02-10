@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.6.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.8'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', :group => [:development, :test]
 # Use SCSS for stylesheets
@@ -12,7 +12,7 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'bootstrap-sass',       '3.2.0.4'
-gem 'activerecord', '4.2.6'
+gem 'activerecord', '4.2.8'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
