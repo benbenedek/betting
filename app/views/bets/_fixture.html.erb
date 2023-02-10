@@ -4,8 +4,8 @@
 <div align="right">
   <h1>מחזור כדורגל <%= fixture.number %></h1> <span id='leftover-time'></div>
 
-  <%= render partial: 'all_matches', locals: {matches: fixture.matches, fixture_bet_for_user: @user_fixture_bet, previous: @previous_matches}  %>
-  
+  <%= render partial: 'all_matches', locals: {matches: fixture.matches, fixture_bet_for_user: @user_fixture_bet }  %>
+
   <% unless fixture.can_still_bet_on_fixture? %>
     <div class="checkbox">
       <label>
@@ -13,11 +13,6 @@
       </label>
     </div>
   <% end %>
-  <div class="checkbox">
-      <label>
-        <input align="right" class="show-previous-games" type="checkbox"> תראה משחקים קודמים
-      </label>
-  </div>
   </br>
   <div class='row'>
     <div class='col-md-2'>

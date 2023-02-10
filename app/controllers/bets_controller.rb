@@ -30,9 +30,7 @@ class BetsController < ApplicationController
       end
       'OK'
     end
-    @previous_matches = Rails.cache.fetch("previous_matches_scores_#{@fixture.id}", :expires_in => 24.hours) do
-      @fixture.get_previous_scores
-    end
+
     @user_fixture_bet = @fixture.get_fixture_bet_for_user(current_user)
   end
 
