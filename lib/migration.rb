@@ -1,4 +1,4 @@
-require 'nokogumbo'
+# require 'nokogumbo'
 
 module Migration
   extend self
@@ -40,7 +40,7 @@ module Migration
         away_team_id = content['data-team2'].to_i
         home_team = Team.where(association_id: home_team_id).first
         away_team = Team.where(association_id: away_team_id).first
-        if (home_team.nil? || away_team.nil?) 
+        if (home_team.nil? || away_team.nil?)
           puts "We have an error!! #{home_team} (#{home_team_id}) - #{away_team} (#{away_team_id})"
           return
         end
@@ -120,7 +120,7 @@ module Migration
     fixture = Fixture.find(fixture_id)
     fixture.destroy!
     fixture_bet = FixtureBet.where(fixture: fixture)
-    fixture_bet.each do |curr_fixture_bet| 
+    fixture_bet.each do |curr_fixture_bet|
       user_bets = UserBet.where(fixture_bet: curr_fixture_bet)
       user_bets.each do |curr_user_bet|
         curr_user_bet.destroy!

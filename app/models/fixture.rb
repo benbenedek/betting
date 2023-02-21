@@ -1,9 +1,9 @@
 require 'migration'
 
 class Fixture < ActiveRecord::Base
-  belongs_to :league
-  has_many :matches
-  has_many :fixture_bets
+  belongs_to :league, :class_name => League.to_s
+  has_many :matches, :class_name => Match.to_s
+  has_many :fixture_bets, :class_name => FixtureBet.to_s
 
   def self.get_upcoming_fixture
     current_date = DateTime.now
@@ -53,7 +53,7 @@ class Fixture < ActiveRecord::Base
     previous_matches = {}
     matches.each do |match|
       match_ids = [match.away_team_id, match.home_team_id].sort
-      matches = Rails.cache.fetch("prev_matches_#{@match_ids.to_s}", :expires_in => 12.hours) do 
+      matches = Rails.cache.fetch("prev_matches_#{@match_ids.to_s}", :expires_in => 12.hours) do
         Match.includes(:away_team, :home_team).where("(home_team_id = ? AND away_team_id = ?) OR (away_team_id = ? AND home_team_id = ?)", match.away_team_id, match.home_team_id, match.away_team_id, match.home_team_id).where.not(score: [nil, ""], date: nil, id: match.id).where("date < ?", match.date).order('date DESC')
       end
       previous_matches[match.id] = matches

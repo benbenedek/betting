@@ -1,3 +1,5 @@
+//= require jquery
+
 (function () {
   if (window.alreadyRan) {
     return;
@@ -6,16 +8,18 @@
   window.alreadyRan = true;
 
   $(".menu-toggler").on("click", function() { $("#playnavbar").toggleClass("in") });
-
   function placeBet(item) {
     match_bet_id = item.currentTarget.getAttribute('match_bet_id');
     option = item.currentTarget.getAttribute('option');
     $.ajax({
       type: "POST",
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url: "/place_bet/" + match_bet_id,
       data: { prediction: option },
       success: function () {
-        $('#success_for_' + match_bet_id).show().fadeOut(1200);
+        $('#success_for_' + match_bet_id).show().fadeOut(2000);
+        $(item.target.parentElement.children).removeClass("active");
+        $(item.target).toggleClass("active");
       }
 
     });
@@ -54,7 +58,6 @@
   function readyAgain(){
     $(".js-bet-click").click(placeBet);
     $(".show-other-bets").click(toggleBets);
-    $(".show-previous-games").click(togglePreviousGames);
     $(document).on('page:fetch',   function() { NProgress.start(); });
     $(document).on('page:change',  function() { NProgress.done(); });
     $(document).on('page:restore', function() { NProgress.remove(); });
@@ -103,7 +106,3 @@
     setUpTimer(document.lastBetDate);
   });
 })();
-
-
-
-

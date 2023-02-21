@@ -1,6 +1,5 @@
 class FixtureBet < ActiveRecord::Base
   belongs_to :fixture
-  belongs_to :league_bet
   has_many :user_bets
 
   def get_fixture_bet_for_user(user, matches)

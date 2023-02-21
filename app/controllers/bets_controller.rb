@@ -47,7 +47,7 @@ class BetsController < ApplicationController
 
     bet.prediction = prediction
     bet.save
-    render status: 200, nothing: true
+    head 200, content_type: "text/html"
   end
 
   def open_close
