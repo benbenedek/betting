@@ -38,6 +38,9 @@
             <%= link_to "פתח מחזור", open_close_path(league_id: fixture.league_id, number: fixture.number, should_open: 'true') %>
           <% end %>
         <% end %>
+        <% if current_user.is_ben? %>
+    	    <br><%= link_to "הרץ מיגרציה", run_migration_path(league_id: fixture.league_id, number: fixture.number) %>
+	      <% end %>
     </div>
 </div>
 <br/><br/>
