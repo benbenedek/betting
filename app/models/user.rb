@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
 
   def is_ben?
-  	 name == 'בן'
+  	 id == 1
   end
 end
