@@ -8,6 +8,88 @@ module Migration
     team
   end
 
+  def fetch_fixture_one(league_id, fixture_round)
+    league = League.find_by_id(league_id)
+    round_games = fetch_and_parse_one_json().select!{ |x| x['round'] == fixture_round }
+    Rails.logger.error "During migration got result #{round_games}"
+
+    parsed_fixture_date = DateTime.parse(round_games.first['date'])
+    fixture = Fixture.where(league: league, number: fixture_round).first ||
+        Fixture.new(league: league, date: parsed_fixture_date, number: fixture_round)
+
+    round_games.each do |game|
+        game_date = game['date']
+        parsed_fixture_date = DateTime.parse(game_date) if parsed_fixture_date > DateTime.parse(game_date)
+
+        score = nil
+        home_team_score = game['homeScore']
+        away_team_score = game['guestScore']
+        if game['isHaveScore']
+          score = "#{away_team_score}-#{home_team_score}"
+        end
+
+        home_team_id = game['homeId']
+        away_team_id = game['guestId']
+        home_team = Team.where(one_id: home_team_id).first
+        away_team = Team.where(one_id: away_team_id).first
+        if (home_team.nil? || away_team.nil?)
+          puts "We have an error!! #{home_team} (#{home_team_id}) - #{away_team} (#{away_team_id})"
+          return
+        end
+
+        match = Match.where(fixture: fixture, home_team: home_team, away_team: away_team).first ||
+          Match.new(fixture: fixture, home_team: home_team, away_team: away_team)
+
+        match.date = game_date
+        match.score = score
+        match.save!
+        p match
+    end
+    fixture.date = parsed_fixture_date
+    fixture.save!
+  end
+
+  def print_all_matches(round_number)
+    res = fetch_and_parse_one_json()
+    res.select!{ |x| x['round'] == round_number }.each do |match|
+      p "#{match['roundName']} #{match['homeName']} #{match['homeScore']} - #{match['guestName']} #{match['guestScore']}"
+    end
+  end
+
+  def print_teams_and_ids()
+    res = fetch_and_parse_one_json()
+    map = {}
+    res.each do |game|
+      map[game['homeName']] = map[game['homeName']]  || []
+      map[game['homeName']] << game['homeId']
+    end
+
+    map
+  end
+
+  def fetch_and_parse_one_json()
+    uri = URI.parse("https://www.one.co.il/cat/leagues/AjaxActions.ashx?a=get-matches&season=23-24&l=1")
+    request = Net::HTTP::Get.new(uri)
+    request["Sec-Ch-Ua"] = "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+    request["Accept"] = "application/json, text/javascript, */*; q=0.01"
+    request["Referer"] = "https://www.one.co.il/Soccer/League/1"
+    request["X-Requested-With"] = "XMLHttpRequest"
+    request["Sec-Ch-Ua-Mobile"] = "?0"
+    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+    request["Sec-Ch-Ua-Platform"] = "\"macOS\""
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    # response.code
+    JSON.parse(response.body)
+  end
+
   def fetch_fixture(league_id, fixture_round)
     league = League.find_by_id(league_id)
     league_stats_str = get_round(league.association_id ,fixture_round)

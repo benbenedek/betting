@@ -21,7 +21,7 @@ class BetsController < ApplicationController
       end
       if @fixture.all_games_dont_hava_scores?
         begin
-          Migration.fetch_fixture(@fixture.league_id, @fixture.number)
+          Migration.fetch_fixture_one(@fixture.league_id, @fixture.number)
           @fixture.reload
         rescue => e
           Rails.logger.error "Got error #{e}\n#{e.backtrace}"
@@ -76,7 +76,7 @@ class BetsController < ApplicationController
 
   def run_migration
     if current_user.is_ben?
-      Migration.fetch_fixture(params[:league_id].to_i, params[:number].to_i)
+      Migration.fetch_fixture_one(params[:league_id].to_i, params[:number].to_i)
       Rails.cache.clear
     end
     redirect_to index_path(league_id: params[:league_id].to_i, number: params[:number].to_i)
