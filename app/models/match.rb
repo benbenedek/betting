@@ -39,7 +39,7 @@ class Match < ActiveRecord::Base
   end
 
   def last_bet_date
-    (date - 3.hours).in_time_zone(default_timezone)
+    (date - 17.hours).in_time_zone(default_timezone)
   end
 
   def can_still_bet_on_match?
