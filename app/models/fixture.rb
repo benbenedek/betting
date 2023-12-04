@@ -38,7 +38,11 @@ class Fixture < ActiveRecord::Base
   end
 
   def seconds_left_to_bet
-    last_bet_date - default_timezone.now
+    last_bet_date_from_matches - default_timezone.now
+  end
+
+  def last_bet_date_from_matches
+    matches.map { |m| m.last_bet_date }.min
   end
 
   def last_bet_date
