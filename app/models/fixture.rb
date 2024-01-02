@@ -7,7 +7,7 @@ class Fixture < ActiveRecord::Base
 
   def self.get_upcoming_fixture
     current_date = DateTime.now
-    Fixture.where("date >= '#{current_date - 3.days}'").includes({ :matches => [:away_team, :home_team]}).first
+    Fixture.where("date >= '#{current_date - 1.days}'").includes({ :matches => [:away_team, :home_team]}).first
   end
 
   def find_game_by(home_team, away_team)
