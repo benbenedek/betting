@@ -10,6 +10,11 @@ class Fixture < ActiveRecord::Base
     Fixture.where("date >= '#{current_date - 1.days}'").includes({ :matches => [:away_team, :home_team]}).first
   end
 
+  def self.get_previous_fixture
+    current_date = DateTime.now
+    Fixture.where("date < '#{current_date}'").includes({ :matches => [:away_team, :home_team]}).last
+  end
+
   def find_game_by(home_team, away_team)
     matches.find { |match| match.home_team.id == home_team.id && match.away_team.id == away_team.id}
   end

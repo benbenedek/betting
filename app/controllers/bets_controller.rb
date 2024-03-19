@@ -69,7 +69,11 @@ class BetsController < ApplicationController
       end
     else
       Rails.cache.fetch("current_fixture", :expires_in => 3.hours) do
-        Fixture.get_upcoming_fixture
+        res = Fixture.get_upcoming_fixture
+        if res.nil?
+          res = Fixture.get_previous_fixture
+        end
+        return res
       end
     end
   end
