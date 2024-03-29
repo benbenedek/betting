@@ -219,4 +219,31 @@ module Migration
       match.destroy!
     end
   end
+
+  def FixMissingBets(fixture)
+    fixture_bet = FixtureBet.where({fixture: fixture}).first
+    User.all.each do |user|
+      user_bets = UserBet.where({user: user, fixture_bet: fixture_bet}).first
+      if user_bets.nil?
+        user_bets = UserBet.new({user: user, fixture_bet: fixture_bet})
+        user_bets.save!
+        user_bets.reload
+      end
+      user_bets = UserBet.where({user: user, fixture_bet: fixture_bet}).first
+      if user_bets.nil?
+        p "SOMETHING WENT WRONG"
+        return
+      end
+      fixture.matches.each do |match|
+        user_bet = user_bets.bets.where({match: match}).first
+        if user_bet.present?
+          p "PRESENT"
+        else
+          user_bets.bets.build({ match: match, prediction: "X"})
+        end
+      end
+      user_bets.save!
+      fixture_bet.save!
+    end
+  end
 end
