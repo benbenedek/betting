@@ -68,7 +68,7 @@ module Migration
   end
 
   def fetch_and_parse_one_json()
-    uri = URI.parse("https://www.one.co.il/cat/leagues/AjaxActions.ashx?a=get-matches&season=23-24&l=1")
+    uri = URI.parse("https://www.one.co.il/cat/leagues/AjaxActions.ashx?a=get-matches&season=24-25&l=1")
     request = Net::HTTP::Get.new(uri)
     request["Sec-Ch-Ua"] = "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
     request["Accept"] = "application/json, text/javascript, */*; q=0.01"
