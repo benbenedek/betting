@@ -10,7 +10,7 @@ module Migration
 
   def fetch_fixture_one(league_id, fixture_round)
     league = League.find_by_id(league_id)
-    round_games = fetch_and_parse_one_json().select!{ |x| x['round'] == fixture_round }
+    round_games = fetch_and_parse_one_json().select!{ |x| x.fetch('round', {}).fetch('ID', -1) == fixture_round }
     Rails.logger.error "During migration got result #{round_games}"
 
     parsed_fixture_date = DateTime.parse(round_games.first['date'])
