@@ -10,7 +10,7 @@ module Migration
 
   def fetch_fixture_one(league_id, fixture_round)
     league = League.find_by_id(league_id)
-    round_games = fetch_and_parse_one_json().select!{ |x| x.fetch('round', {}).fetch('ID', -1) == fixture_round }
+    round_games = fetch_and_parse_one_json().select!{ |x| x.fetch('roundName', "") == "ליגת העל Winner - מחזור #{fixture_round}" }
     Rails.logger.error "During migration got result #{round_games}"
 
     parsed_fixture_date = DateTime.parse(round_games.first['date'])
@@ -51,7 +51,7 @@ module Migration
 
   def print_all_matches(round_number)
     res = fetch_and_parse_one_json()
-    res.select!{ |x| x['round'] == round_number }.each do |match|
+    res.select!{ |x| x['roundName'] == "ליגת העל Winner - מחזור #{round_number}" }.each do |match|
       p "#{match['roundName']} #{match['homeName']} #{match['homeScore']} - #{match['guestName']} #{match['guestScore']}"
     end
   end
@@ -88,6 +88,36 @@ module Migration
 
     # response.code
     JSON.parse(response.body)
+  end
+
+  def fetch_and_parse_footballcoil_json()
+    uri = URI.parse("https://cdnapi.bamboo-video.com/api/football/round?format=json&iid=573881b7181f46ae4c8b4567&filter=\\{%22seasonName%22:%2224/25%22\\}&useCache=false&ts=1")
+    request = Net::HTTP::Get.new(uri)
+    request["Accept"] = "*/*"
+    request["Accept-Language"] = "en-US,en;q=0.9,he-IL;q=0.8,he;q=0.7"
+    request["Cache-Control"] = "no-cache"
+    request["Origin"] = "https://www.football.co.il"
+    request["Pragma"] = "no-cache"
+    request["Priority"] = "u=1, i"
+    request["Referer"] = "https://www.football.co.il/"
+    request["Sec-Ch-Ua"] = "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\""
+    request["Sec-Ch-Ua-Mobile"] = "?0"
+    request["Sec-Ch-Ua-Platform"] = "\"macOS\""
+    request["Sec-Fetch-Dest"] = "empty"
+    request["Sec-Fetch-Mode"] = "cors"
+    request["Sec-Fetch-Site"] = "cross-site"
+    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+
+    # response.code
+    JSON.parse(response.body)['data']
   end
 
   def fetch_fixture(league_id, fixture_round)
