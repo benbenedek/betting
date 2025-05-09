@@ -13,13 +13,16 @@ module Migration
     round_games = Migration.fetch_and_parse_one_json().fetch('Data',{})['Leagues'].first['Matches'].select!{ |x| x['Round']['Name']['Main'] == "ליגת העל Winner - מחזור #{fixture_round}" }
     Rails.logger.error "During migration got result #{round_games}"
 
-    parsed_fixture_date = Time.at(round_games.first['Timer']['Kickoff'])
+    parsed_fixture_date = Time.at(round_games.first['Timer']['Kickoff']).to_datetime
+    if parsed_fixture_date.nil?
+      throw "Weird date from ${round_games.first['Timer']['Kickoff']}"
+    end
     fixture = Fixture.where(league: league, number: fixture_round).first ||
         Fixture.new(league: league, date: parsed_fixture_date, number: fixture_round)
 
     round_games.each do |game|
-        game_date = game['Timer']['Kickoff']
-        parsed_fixture_date = Time.at(game_date) if parsed_fixture_date > Time.at(game_date)
+        game_date = Time.at(game['Timer']['Kickoff']).to_datetime
+        parsed_fixture_date = game_date if parsed_fixture_date > game_date
 
         score = nil
         home_team_score = game['Home']['Score']['Match']
