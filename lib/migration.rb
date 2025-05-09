@@ -10,26 +10,26 @@ module Migration
 
   def fetch_fixture_one(league_id, fixture_round)
     league = League.find_by_id(league_id)
-    round_games = fetch_and_parse_one_json().select!{ |x| x.fetch('roundName', "") == "ליגת העל Winner - מחזור #{fixture_round}" }
+    round_games = Migration.fetch_and_parse_one_json().fetch('Data',{})['Leagues'].first['Matches'].select!{ |x| x['Round']['Name']['Main'] == "ליגת העל Winner - מחזור #{fixture_round}" }
     Rails.logger.error "During migration got result #{round_games}"
 
-    parsed_fixture_date = DateTime.parse(round_games.first['date'])
+    parsed_fixture_date = Time.at(round_games.first['Timer']['Kickoff'])
     fixture = Fixture.where(league: league, number: fixture_round).first ||
         Fixture.new(league: league, date: parsed_fixture_date, number: fixture_round)
 
     round_games.each do |game|
-        game_date = game['date']
-        parsed_fixture_date = DateTime.parse(game_date) if parsed_fixture_date > DateTime.parse(game_date)
+        game_date = game['Timer']['Kickoff']
+        parsed_fixture_date = Time.at(game_date) if parsed_fixture_date > Time.at(game_date)
 
         score = nil
-        home_team_score = game['homeScore']
-        away_team_score = game['guestScore']
-        if game['isHaveScore']
+        home_team_score = game['Home']['Score']['Match']
+        away_team_score = game['Away']['Score']['Match']
+        if home_team_score >= 0 && away_team_score >= 0
           score = "#{away_team_score}-#{home_team_score}"
         end
 
-        home_team_id = game['homeId']
-        away_team_id = game['guestId']
+        home_team_id = game['Home']['ID']
+        away_team_id = game['Away']['ID']
         home_team = Team.where(one_id: home_team_id).first
         away_team = Team.where(one_id: away_team_id).first
         if (home_team.nil? || away_team.nil?)
