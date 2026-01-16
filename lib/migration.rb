@@ -19,6 +19,7 @@ module Migration
     end
     fixture = Fixture.where(league: league, number: fixture_round).first ||
         Fixture.new(league: league, date: parsed_fixture_date, number: fixture_round)
+    fixture.save!
 
     round_games.each do |game|
         game_date = Time.at(game['Timer']['Kickoff']).to_datetime
