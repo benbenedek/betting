@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require bootstrap
 //= require nprogress
+//= require moment.min
 //= require_tree .
