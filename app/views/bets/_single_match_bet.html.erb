@@ -17,10 +17,13 @@
   <td class="<%= match.bet_score == prediction ? "success" : "info" %>"><%= prediction %></td>
 <% end %>
 <% unless match.can_still_bet_on_match? %>
-  <% User.where("id <> #{current_user.id}").order(:id).each {|user| %>
-    <% fb = @fixture.get_fixture_bet_for_user(user) %>
-    <% bet = fb.bets.where("match_id = #{match.id}").first %>
-    <td class="hidden other_user_bet <%= match.bet_score == bet.prediction ? "success" : "info" %>"><%= bet.prediction %></td>
+  <% @other_users.each {|user| %>
+    <% bet = @other_users_bets.dig(user.id, match.id) %>
+    <% if bet %>
+      <td class="hidden other_user_bet <%= match.bet_score == bet.prediction ? "success" : "info" %>"><%= bet.prediction %></td>
+    <% else %>
+      <td class="hidden other_user_bet">-</td>
+    <% end %>
   <% } %>
 <% end %>
 <td><span id='<%= "success_for_#{match_bet.id}" %>' class="label label-success" style="display: none">הימור התקבל</span></td>

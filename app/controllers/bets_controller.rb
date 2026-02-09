@@ -3,9 +3,6 @@ require_relative '../../lib/migration'
 class BetsController < ApplicationController
   def index
     redirect_to login_path and return unless logged_in?
-    # @fixture = params[:number].present? ?
-    #   Fixture.where(league_id: params[:league_id].to_i, number: params[:number].to_i).includes(:matches, :fixture_bets).first :
-    #   Fixture.get_upcoming_fixture
 
     @fixture = fetch_fixture_cached(params[:league_id], params[:number])
 
@@ -32,6 +29,9 @@ class BetsController < ApplicationController
     end
 
     @user_fixture_bet = @fixture.get_fixture_bet_for_user(current_user)
+    
+    # Preload data to avoid N+1 queries in views
+    preload_view_data
   end
 
   def place_bet
@@ -59,12 +59,12 @@ class BetsController < ApplicationController
       @fixture.save!
       Rails.cache.clear
     end
-    redirect_to index_path(league_id: params[:league_id].to_i, number: params[:number].to_i)
+    redirect_to classic_index_path(league_id: params[:league_id].to_i, number: params[:number].to_i)
   end
 
   def fetch_fixture_cached(league_id, fixture_number)
     if fixture_number.present?
-      Rails.cache.fetch("fixture_#{@league_id}_#{fixture_number}", :expires_in => 3.hours) do
+      Rails.cache.fetch("fixture_#{league_id}_#{fixture_number}", :expires_in => 3.hours) do
         Fixture.where(league_id: league_id.to_i, number: fixture_number.to_i).includes({ :matches => [:away_team, :home_team]}).first
       end
     else
@@ -83,7 +83,36 @@ class BetsController < ApplicationController
       Migration.fetch_fixture_one(params[:league_id].to_i, params[:number].to_i)
       Rails.cache.clear
     end
-    redirect_to index_path(league_id: params[:league_id].to_i, number: params[:number].to_i)
+    redirect_to classic_index_path(league_id: params[:league_id].to_i, number: params[:number].to_i)
   end
 
+  private
+
+  def preload_view_data
+    return unless @fixture.present? && @user_fixture_bet.present?
+
+    # Preload other users (excluding current user)
+    @other_users = User.where.not(id: current_user.id).order(:id).to_a
+
+    # Create a lookup hash for current user's bets by match_id
+    @current_user_bets_by_match = @user_fixture_bet.bets.includes(:match).index_by(&:match_id)
+
+    # Preload all other users' bets for this fixture in ONE query
+    # This replaces N×M queries with just 1
+    fixture_bet = @fixture.get_fixture_bet
+    
+    all_other_bets = Bet.joins(:user_bet)
+                        .includes(:match, user_bet: :user)
+                        .where(user_bets: { fixture_bet_id: fixture_bet.id })
+                        .where.not(user_bets: { user_id: current_user.id })
+                        .to_a
+
+    # Build lookup hash: { user_id => { match_id => bet } }
+    @other_users_bets = {}
+    all_other_bets.each do |bet|
+      user_id = bet.user_bet.user_id
+      @other_users_bets[user_id] ||= {}
+      @other_users_bets[user_id][bet.match_id] = bet
+    end
+  end
 end

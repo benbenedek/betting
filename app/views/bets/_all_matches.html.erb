@@ -7,13 +7,13 @@
     <th>חוץ</th>
     <th>תוצאה</th>
     <th>הימור</th>
-    <% User.where("id <> #{current_user.id}").order(:id).each {|user| %>
+    <% @other_users.each {|user| %>
       <th class="hidden other_user_bet"><%= user.name %></th>
     <% } %>
   </thead>
   <tbody>
   <% matches.each { |match| %>
-    <%= render partial: 'single_match', locals: {match: match, bet_for_match: fixture_bet_for_user.bets.where("match_id = #{match.id}").first}  %>
+    <%= render partial: 'single_match', locals: {match: match, bet_for_match: @current_user_bets_by_match[match.id]}  %>
   <% } %>
   </tbody>
   </table>
