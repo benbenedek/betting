@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import api from '../../lib/api'
+import { LoadingSpinner } from '../BettingApp'
 
 // Medal/trophy icons for podium
 const RANK_ICONS = {
@@ -16,7 +17,7 @@ const RANK_COLORS = {
   3: 'linear-gradient(90deg, rgba(205,127,50,0.3) 0%, rgba(205,127,50,0.1) 100%)'
 }
 
-// CSS for responsive styles
+// CSS for responsive styles (enhanced)
 const mobileStyles = `
   @media (max-width: 768px) {
     .podium-container {
@@ -36,8 +37,8 @@ const mobileStyles = `
     }
     .score-table-main th,
     .score-table-main td {
-      padding: 6px 4px !important;
-      font-size: 0.85em !important;
+      padding: 8px 6px !important;
+      font-size: 0.9em !important;
     }
     .hide-on-mobile {
       display: none !important;
@@ -51,6 +52,13 @@ const mobileStyles = `
     }
     .mini-chart-container {
       overflow-x: auto;
+    }
+    .score-page-header {
+      padding: var(--space-md) !important;
+    }
+    .league-dropdown-btn {
+      min-height: 48px !important;
+      padding: 12px 16px !important;
     }
   }
 `
@@ -214,11 +222,11 @@ export default function ScoreTable() {
   }
 
   if (loading) {
-    return <div className="text-center" style={{ padding: '50px' }}><p>טוען...</p></div>
+    return <LoadingSpinner text="טוען טבלה..." />
   }
 
   if (error) {
-    return <div className="alert alert-danger">{error}</div>
+    return <div className="alert alert-error">{error}</div>
   }
 
   if (!data) {

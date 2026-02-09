@@ -1329,7 +1329,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React17 = require_react(), Internals = {
+        var React18 = require_react(), Internals = {
           d: {
             f: noop,
             r: function() {
@@ -1347,7 +1347,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React17.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React18.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -2882,7 +2882,7 @@
           "number" === type && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React17.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React18.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18514,14 +18514,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React17 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React18 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React17.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React18.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21309,7 +21309,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React17.version;
+          var isomorphicReactPackageVersion = React18.version;
           if ("19.2.4" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.4\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21450,11 +21450,11 @@
   });
 
   // app/javascript/application.js
-  var import_react5 = __toESM(require_react());
+  var import_react6 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // app/javascript/components/BettingApp.js
-  var import_react4 = __toESM(require_react());
+  var import_react5 = __toESM(require_react());
 
   // node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs
   var React = __toESM(require_react(), 1);
@@ -24009,7 +24009,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }
 
   // app/javascript/components/Bets/BetsList.js
-  var import_react2 = __toESM(require_react());
+  var import_react3 = __toESM(require_react());
 
   // app/javascript/lib/api.js
   var API_BASE = "/api/v1";
@@ -24071,25 +24071,34 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   var import_react = __toESM(require_react());
   function SingleMatch({ match, bet, onBetUpdate, canBet, otherBets }) {
     const [saving, setSaving] = (0, import_react.useState)(false);
+    const [savingPrediction, setSavingPrediction] = (0, import_react.useState)(null);
     const handlePredictionClick = async (prediction) => {
       if (!canBet || saving || !bet) return;
       setSaving(true);
+      setSavingPrediction(prediction);
       await onBetUpdate(bet.id, prediction);
       setSaving(false);
+      setSavingPrediction(null);
     };
     const isCorrectPrediction = match.bet_score && bet?.prediction === match.bet_score;
-    return /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("td", { className: "hidden-sm hidden-xs" }, match.date), /* @__PURE__ */ import_react.default.createElement("td", null, match.home_team.name), /* @__PURE__ */ import_react.default.createElement("td", null, "-"), /* @__PURE__ */ import_react.default.createElement("td", null, match.away_team.name), /* @__PURE__ */ import_react.default.createElement("td", null, match.score ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, match.score, " (", match.bet_score, ")") : "-"), canBet ? /* @__PURE__ */ import_react.default.createElement("td", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "btn-group", "data-toggle": "buttons" }, /* @__PURE__ */ import_react.default.createElement(
+    const hasScore = match.score && match.bet_score;
+    return /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("td", { style: { color: "var(--text-secondary)", fontSize: "0.9rem" } }, match.date), /* @__PURE__ */ import_react.default.createElement("td", { style: { fontWeight: 500 } }, match.home_team.name), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "center", color: "var(--text-muted)" } }, "-"), /* @__PURE__ */ import_react.default.createElement("td", { style: { fontWeight: 500 } }, match.away_team.name), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "center" } }, match.score ? /* @__PURE__ */ import_react.default.createElement("span", { style: {
+      background: "var(--bg-hover)",
+      padding: "4px 8px",
+      borderRadius: "6px",
+      fontWeight: 600
+    } }, match.score, " (", match.bet_score, ")") : /* @__PURE__ */ import_react.default.createElement("span", { style: { color: "var(--text-muted)" } }, "-")), canBet ? /* @__PURE__ */ import_react.default.createElement("td", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "bet-buttons-group" }, /* @__PURE__ */ import_react.default.createElement(
       "button",
       {
-        className: `btn btn-primary btn-xs ${bet?.prediction === "2" ? "active" : ""}`,
-        onClick: () => handlePredictionClick("2"),
+        className: `bet-button ${bet?.prediction === "1" ? "active" : ""} ${saving && savingPrediction === "1" ? "saving" : ""}`,
+        onClick: () => handlePredictionClick("1"),
         disabled: saving
       },
-      "2"
+      "1"
     ), /* @__PURE__ */ import_react.default.createElement(
       "button",
       {
-        className: `btn btn-primary btn-xs ${bet?.prediction === "X" ? "active" : ""}`,
+        className: `bet-button ${bet?.prediction === "X" ? "active" : ""} ${saving && savingPrediction === "X" ? "saving" : ""}`,
         onClick: () => handlePredictionClick("X"),
         disabled: saving
       },
@@ -24097,15 +24106,175 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ), /* @__PURE__ */ import_react.default.createElement(
       "button",
       {
-        className: `btn btn-primary btn-xs ${bet?.prediction === "1" ? "active" : ""}`,
+        className: `bet-button ${bet?.prediction === "2" ? "active" : ""} ${saving && savingPrediction === "2" ? "saving" : ""}`,
+        onClick: () => handlePredictionClick("2"),
+        disabled: saving
+      },
+      "2"
+    ))) : /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+      display: "inline-block",
+      padding: "6px 12px",
+      borderRadius: "6px",
+      fontWeight: 700,
+      fontSize: "1rem",
+      background: hasScore ? isCorrectPrediction ? "var(--color-success)" : "var(--bg-hover)" : "var(--bg-hover)",
+      color: hasScore ? isCorrectPrediction ? "var(--text-inverse)" : "var(--text-primary)" : "var(--text-primary)"
+    } }, bet?.prediction || "-", hasScore && (isCorrectPrediction ? " \u2713" : ""))), otherBets && otherBets.map((otherBet, index) => {
+      const isOtherCorrect = match.bet_score && otherBet.prediction === match.bet_score;
+      return /* @__PURE__ */ import_react.default.createElement("td", { key: index, style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+        display: "inline-block",
+        padding: "4px 10px",
+        borderRadius: "6px",
+        fontWeight: 600,
+        fontSize: "0.9rem",
+        background: hasScore ? isOtherCorrect ? "var(--color-success)" : "var(--bg-hover)" : "var(--bg-hover)",
+        color: hasScore ? isOtherCorrect ? "var(--text-inverse)" : "var(--text-secondary)" : "var(--text-secondary)"
+      } }, otherBet.prediction));
+    }));
+  }
+
+  // app/javascript/components/Bets/MatchCard.js
+  var import_react2 = __toESM(require_react());
+  function MatchCard({ match, bet, onBetUpdate, canBet, otherBets }) {
+    const [saving, setSaving] = (0, import_react2.useState)(false);
+    const [savingPrediction, setSavingPrediction] = (0, import_react2.useState)(null);
+    const handlePredictionClick = async (prediction) => {
+      if (!canBet || saving || !bet) return;
+      setSaving(true);
+      setSavingPrediction(prediction);
+      await onBetUpdate(bet.id, prediction);
+      setSaving(false);
+      setSavingPrediction(null);
+    };
+    const isCorrectPrediction = match.bet_score && bet?.prediction === match.bet_score;
+    const hasScore = match.score && match.bet_score;
+    const groupedBets = otherBets ? otherBets.reduce((acc, bet2) => {
+      if (!acc[bet2.prediction]) acc[bet2.prediction] = [];
+      acc[bet2.prediction].push(bet2.user);
+      return acc;
+    }, {}) : {};
+    return /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-card" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-card-header" }, /* @__PURE__ */ import_react2.default.createElement("span", { className: "match-card-date" }, match.date), hasScore && /* @__PURE__ */ import_react2.default.createElement("span", { className: "match-card-score" }, match.score, " (", match.bet_score, ")")), /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-card-body" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-teams" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-team" }, /* @__PURE__ */ import_react2.default.createElement("span", { style: {
+      background: "var(--color-primary)",
+      color: "white",
+      fontSize: "0.65rem",
+      fontWeight: 600,
+      padding: "2px 6px",
+      borderRadius: "var(--radius-sm)",
+      marginLeft: "8px"
+    } }, "\u05D1\u05D9\u05EA"), /* @__PURE__ */ import_react2.default.createElement("span", { style: { fontWeight: 600 } }, match.home_team.name)), /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-vs" }, "VS"), /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-team" }, /* @__PURE__ */ import_react2.default.createElement("span", { style: {
+      background: "var(--text-secondary)",
+      color: "white",
+      fontSize: "0.65rem",
+      fontWeight: 600,
+      padding: "2px 6px",
+      borderRadius: "var(--radius-sm)",
+      marginLeft: "8px"
+    } }, "\u05D7\u05D5\u05E5"), /* @__PURE__ */ import_react2.default.createElement("span", { style: { fontWeight: 600 } }, match.away_team.name)))), /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-card-footer" }, canBet ? /* @__PURE__ */ import_react2.default.createElement("div", { className: "bet-buttons-group" }, /* @__PURE__ */ import_react2.default.createElement(
+      "button",
+      {
+        className: `bet-button ${bet?.prediction === "1" ? "active" : ""} ${saving && savingPrediction === "1" ? "saving" : ""}`,
         onClick: () => handlePredictionClick("1"),
         disabled: saving
       },
       "1"
-    ))) : /* @__PURE__ */ import_react.default.createElement("td", { className: isCorrectPrediction ? "success" : "info" }, bet?.prediction || "-"), otherBets && otherBets.map((otherBet, index) => {
-      const isOtherCorrect = match.bet_score && otherBet.prediction === match.bet_score;
-      return /* @__PURE__ */ import_react.default.createElement("td", { key: index, className: isOtherCorrect ? "success" : "info" }, otherBet.prediction);
-    }), /* @__PURE__ */ import_react.default.createElement("td", null, saving && /* @__PURE__ */ import_react.default.createElement("span", { className: "label label-info" }, "\u05E9\u05D5\u05DE\u05E8...")));
+    ), /* @__PURE__ */ import_react2.default.createElement(
+      "button",
+      {
+        className: `bet-button ${bet?.prediction === "X" ? "active" : ""} ${saving && savingPrediction === "X" ? "saving" : ""}`,
+        onClick: () => handlePredictionClick("X"),
+        disabled: saving
+      },
+      "X"
+    ), /* @__PURE__ */ import_react2.default.createElement(
+      "button",
+      {
+        className: `bet-button ${bet?.prediction === "2" ? "active" : ""} ${saving && savingPrediction === "2" ? "saving" : ""}`,
+        onClick: () => handlePredictionClick("2"),
+        disabled: saving
+      },
+      "2"
+    )) : /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-user-prediction" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "match-prediction-label" }, "\u05D4\u05D4\u05D9\u05DE\u05D5\u05E8 \u05E9\u05DC\u05DA"), /* @__PURE__ */ import_react2.default.createElement("div", { className: `match-prediction-value ${hasScore ? isCorrectPrediction ? "correct" : "incorrect" : ""}` }, bet?.prediction || "-", hasScore && (isCorrectPrediction ? " \u2713" : " \u2717")))), otherBets && otherBets.length > 0 && /* @__PURE__ */ import_react2.default.createElement(
+      OtherBetsDisplay,
+      {
+        groupedBets,
+        correctPrediction: match.bet_score,
+        hasScore
+      }
+    ));
+  }
+  function OtherBetsDisplay({ groupedBets, correctPrediction, hasScore }) {
+    const predictions = ["1", "X", "2"];
+    return /* @__PURE__ */ import_react2.default.createElement("div", { style: {
+      borderTop: "1px solid var(--bg-hover)",
+      padding: "var(--space-md)",
+      background: "var(--bg-primary)"
+    } }, /* @__PURE__ */ import_react2.default.createElement("div", { style: {
+      display: "grid",
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gap: "var(--space-sm)"
+    } }, predictions.map((prediction) => {
+      const users = groupedBets[prediction] || [];
+      const isCorrect = hasScore && prediction === correctPrediction;
+      const isEmpty = users.length === 0;
+      return /* @__PURE__ */ import_react2.default.createElement(
+        "div",
+        {
+          key: prediction,
+          style: {
+            background: isEmpty ? "transparent" : hasScore ? isCorrect ? "rgba(16, 185, 129, 0.15)" : "rgba(239, 68, 68, 0.08)" : "var(--bg-card)",
+            borderRadius: "var(--radius-md)",
+            padding: "var(--space-sm)",
+            border: isEmpty ? "1px dashed var(--text-muted)" : hasScore ? isCorrect ? "2px solid var(--color-success)" : "1px solid var(--bg-hover)" : "1px solid var(--bg-hover)",
+            opacity: isEmpty ? 0.4 : 1,
+            transition: "var(--transition-fast)"
+          }
+        },
+        /* @__PURE__ */ import_react2.default.createElement("div", { style: {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "var(--space-xs)",
+          marginBottom: "var(--space-xs)"
+        } }, /* @__PURE__ */ import_react2.default.createElement("span", { style: {
+          fontWeight: 700,
+          fontSize: "1.1rem",
+          color: hasScore ? isCorrect ? "var(--color-success)" : "var(--text-secondary)" : "var(--color-primary)"
+        } }, prediction), hasScore && isCorrect && /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "var(--color-success)", fontSize: "0.9rem" } }, "\u2713"), users.length > 0 && /* @__PURE__ */ import_react2.default.createElement("span", { style: {
+          background: hasScore ? isCorrect ? "var(--color-success)" : "var(--text-muted)" : "var(--color-primary)",
+          color: "white",
+          fontSize: "0.7rem",
+          fontWeight: 600,
+          padding: "1px 6px",
+          borderRadius: "var(--radius-full)",
+          minWidth: "18px",
+          textAlign: "center"
+        } }, users.length)),
+        /* @__PURE__ */ import_react2.default.createElement("div", { style: {
+          display: "flex",
+          flexDirection: "column",
+          gap: "2px",
+          alignItems: "center"
+        } }, users.length === 0 ? /* @__PURE__ */ import_react2.default.createElement("span", { style: {
+          fontSize: "0.7rem",
+          color: "var(--text-muted)"
+        } }, "\u2014") : users.map((user, idx) => /* @__PURE__ */ import_react2.default.createElement(
+          "span",
+          {
+            key: idx,
+            style: {
+              fontSize: "0.75rem",
+              color: hasScore ? isCorrect ? "var(--color-success)" : "var(--text-secondary)" : "var(--text-primary)",
+              fontWeight: isCorrect ? 500 : 400,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              maxWidth: "100%"
+            }
+          },
+          user.name
+        )))
+      );
+    })));
   }
 
   // app/javascript/components/Bets/BetsList.js
@@ -24113,17 +24282,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     const params = useParams();
     const leagueId = propLeagueId || params.leagueId;
     const fixtureNumber = propNumber || params.fixtureNumber;
-    const [loading, setLoading] = (0, import_react2.useState)(true);
-    const [error, setError] = (0, import_react2.useState)(null);
-    const [fixture, setFixture] = (0, import_react2.useState)(null);
-    const [matches, setMatches] = (0, import_react2.useState)([]);
-    const [userBets, setUserBets] = (0, import_react2.useState)(null);
-    const [allFixtures, setAllFixtures] = (0, import_react2.useState)([]);
-    const [currentUser, setCurrentUser] = (0, import_react2.useState)(null);
-    const [otherUsersBets, setOtherUsersBets] = (0, import_react2.useState)(null);
-    const [showOtherBets, setShowOtherBets] = (0, import_react2.useState)(false);
-    const [dropdownOpen, setDropdownOpen] = (0, import_react2.useState)(false);
-    const loadFixture = (0, import_react2.useCallback)(async () => {
+    const [loading, setLoading] = (0, import_react3.useState)(true);
+    const [error, setError] = (0, import_react3.useState)(null);
+    const [fixture, setFixture] = (0, import_react3.useState)(null);
+    const [matches, setMatches] = (0, import_react3.useState)([]);
+    const [userBets, setUserBets] = (0, import_react3.useState)(null);
+    const [allFixtures, setAllFixtures] = (0, import_react3.useState)([]);
+    const [currentUser, setCurrentUser] = (0, import_react3.useState)(null);
+    const [otherUsersBets, setOtherUsersBets] = (0, import_react3.useState)(null);
+    const [showOtherBets, setShowOtherBets] = (0, import_react3.useState)(false);
+    const [dropdownOpen, setDropdownOpen] = (0, import_react3.useState)(false);
+    const loadFixture = (0, import_react3.useCallback)(async () => {
       try {
         setLoading(true);
         setError(null);
@@ -24160,7 +24329,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         setLoading(false);
       }
     }, [leagueId, fixtureNumber]);
-    (0, import_react2.useEffect)(() => {
+    (0, import_react3.useEffect)(() => {
       loadFixture();
     }, [loadFixture]);
     const handleBetUpdate = async (betId, prediction) => {
@@ -24202,20 +24371,21 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       }
     };
     if (loading) {
-      return /* @__PURE__ */ import_react2.default.createElement("div", { className: "text-center" }, /* @__PURE__ */ import_react2.default.createElement("p", null, "\u05D8\u05D5\u05E2\u05DF..."));
+      return /* @__PURE__ */ import_react3.default.createElement(LoadingSpinner, { text: "\u05D8\u05D5\u05E2\u05DF \u05DE\u05E9\u05D7\u05E7\u05D9\u05DD..." });
     }
     if (error) {
-      return /* @__PURE__ */ import_react2.default.createElement("div", { className: "alert alert-danger" }, error);
+      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "alert alert-error" }, error);
     }
     if (!fixture) {
-      return /* @__PURE__ */ import_react2.default.createElement("div", { className: "fixture", dir: "rtl" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "alert alert-warning" }, "\u05E9\u05DE\u05E2 \u05D0\u05D9\u05DF \u05DE\u05D7\u05D6\u05D5\u05E8 \u05DB\u05D6\u05D4 \u05D1\u05D9\u05E0\u05EA\u05D9\u05D9\u05DD... \u05D1\u05D0\u05E1\u05D4"), currentUser?.is_admin && /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement(
+      return /* @__PURE__ */ import_react3.default.createElement("div", { style: { padding: "16px" } }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "alert alert-warning" }, "\u05E9\u05DE\u05E2 \u05D0\u05D9\u05DF \u05DE\u05D7\u05D6\u05D5\u05E8 \u05DB\u05D6\u05D4 \u05D1\u05D9\u05E0\u05EA\u05D9\u05D9\u05DD... \u05D1\u05D0\u05E1\u05D4"), currentUser?.is_admin && /* @__PURE__ */ import_react3.default.createElement("div", { className: "admin-controls" }, /* @__PURE__ */ import_react3.default.createElement(
         "a",
         {
           href: "#",
           onClick: (e) => {
             e.preventDefault();
             handleRunMigration();
-          }
+          },
+          className: "admin-link"
         },
         "\u05D4\u05E8\u05E5 \u05DE\u05D9\u05D2\u05E8\u05E6\u05D9\u05D4"
       )));
@@ -24241,7 +24411,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       });
     }
     const otherUsers = otherUsersBets ? otherUsersBets.map((ub) => ub.user) : [];
-    return /* @__PURE__ */ import_react2.default.createElement("div", { className: "fixture", dir: "rtl" }, /* @__PURE__ */ import_react2.default.createElement("h1", null, "\u05DE\u05D7\u05D6\u05D5\u05E8 \u05DB\u05D3\u05D5\u05E8\u05D2\u05DC ", fixture.number), fixture.can_still_bet && fixture.seconds_left_to_bet > 0 && /* @__PURE__ */ import_react2.default.createElement("p", { className: "text-muted" }, "\u05D6\u05DE\u05DF \u05E9\u05E0\u05D5\u05EA\u05E8 \u05DC\u05D4\u05D9\u05DE\u05D5\u05E8: ", formatTimeLeft(fixture.seconds_left_to_bet)), /* @__PURE__ */ import_react2.default.createElement("div", { className: "h-scroller" }, /* @__PURE__ */ import_react2.default.createElement("table", { className: "table" }, /* @__PURE__ */ import_react2.default.createElement("thead", null, /* @__PURE__ */ import_react2.default.createElement("tr", null, /* @__PURE__ */ import_react2.default.createElement("th", { className: "hidden-sm hidden-xs" }, "\u05EA\u05D0\u05E8\u05D9\u05DA"), /* @__PURE__ */ import_react2.default.createElement("th", null, "\u05D1\u05D9\u05EA"), /* @__PURE__ */ import_react2.default.createElement("th", null), /* @__PURE__ */ import_react2.default.createElement("th", null, "\u05D7\u05D5\u05E5"), /* @__PURE__ */ import_react2.default.createElement("th", null, "\u05EA\u05D5\u05E6\u05D0\u05D4"), /* @__PURE__ */ import_react2.default.createElement("th", null, "\u05D4\u05D9\u05DE\u05D5\u05E8"), showOtherBets && otherUsers.map((user) => /* @__PURE__ */ import_react2.default.createElement("th", { key: user.id }, user.name)), /* @__PURE__ */ import_react2.default.createElement("th", null))), /* @__PURE__ */ import_react2.default.createElement("tbody", null, matches.map((match) => /* @__PURE__ */ import_react2.default.createElement(
+    return /* @__PURE__ */ import_react3.default.createElement("div", { dir: "rtl" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "page-header" }, /* @__PURE__ */ import_react3.default.createElement("h1", { className: "page-title" }, "\u05DE\u05D7\u05D6\u05D5\u05E8 ", fixture.number), fixture.can_still_bet && fixture.seconds_left_to_bet > 0 && /* @__PURE__ */ import_react3.default.createElement("div", { className: "time-left" }, /* @__PURE__ */ import_react3.default.createElement("span", { className: "time-left-icon" }, "\u23F1\uFE0F"), formatTimeLeft(fixture.seconds_left_to_bet))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "matches-container" }, matches.map((match) => /* @__PURE__ */ import_react3.default.createElement(
+      MatchCard,
+      {
+        key: match.id,
+        match,
+        bet: betsByMatchId[match.id],
+        onBetUpdate: handleBetUpdate,
+        canBet: match.can_still_bet,
+        otherBets: showOtherBets ? otherBetsByMatchId[match.id] : null
+      }
+    ))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "matches-table-container" }, /* @__PURE__ */ import_react3.default.createElement("table", { className: "matches-table" }, /* @__PURE__ */ import_react3.default.createElement("thead", null, /* @__PURE__ */ import_react3.default.createElement("tr", null, /* @__PURE__ */ import_react3.default.createElement("th", null, "\u05EA\u05D0\u05E8\u05D9\u05DA"), /* @__PURE__ */ import_react3.default.createElement("th", null, "\u05D1\u05D9\u05EA"), /* @__PURE__ */ import_react3.default.createElement("th", null), /* @__PURE__ */ import_react3.default.createElement("th", null, "\u05D7\u05D5\u05E5"), /* @__PURE__ */ import_react3.default.createElement("th", null, "\u05EA\u05D5\u05E6\u05D0\u05D4"), /* @__PURE__ */ import_react3.default.createElement("th", null, "\u05D4\u05D9\u05DE\u05D5\u05E8"), showOtherBets && otherUsers.map((user) => /* @__PURE__ */ import_react3.default.createElement("th", { key: user.id }, user.name)))), /* @__PURE__ */ import_react3.default.createElement("tbody", null, matches.map((match) => /* @__PURE__ */ import_react3.default.createElement(
       SingleMatch,
       {
         key: match.id,
@@ -24251,45 +24431,42 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         canBet: match.can_still_bet,
         otherBets: showOtherBets ? otherBetsByMatchId[match.id] : null
       }
-    ))))), !fixture.can_still_bet && otherUsersBets && /* @__PURE__ */ import_react2.default.createElement("div", { className: "checkbox" }, /* @__PURE__ */ import_react2.default.createElement("label", null, /* @__PURE__ */ import_react2.default.createElement(
+    ))))), !fixture.can_still_bet && otherUsersBets && /* @__PURE__ */ import_react3.default.createElement("div", { className: "toggle-container" }, /* @__PURE__ */ import_react3.default.createElement(
       "input",
       {
         type: "checkbox",
+        id: "showOtherBets",
+        className: "toggle-checkbox",
         checked: showOtherBets,
         onChange: (e) => setShowOtherBets(e.target.checked)
       }
-    ), "\u05EA\u05E8\u05D0\u05D4 \u05D0\u05EA \u05D4\u05D4\u05D9\u05DE\u05D5\u05E8\u05D9\u05DD \u05E9\u05DC \u05DB\u05D5\u05DC\u05DD")), /* @__PURE__ */ import_react2.default.createElement("br", null), /* @__PURE__ */ import_react2.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "col-md-2" }, /* @__PURE__ */ import_react2.default.createElement(FixtureNavigation, { fixture, allFixtures })), /* @__PURE__ */ import_react2.default.createElement("div", { className: "dropdown col-md-2", style: { position: "relative" } }, "\u05DC\u05DA \u05DC\u05DE\u05D7\u05D6\u05D5\u05E8", " ", /* @__PURE__ */ import_react2.default.createElement(
+    ), /* @__PURE__ */ import_react3.default.createElement("label", { htmlFor: "showOtherBets", className: "toggle-label" }, "\u05EA\u05E8\u05D0\u05D4 \u05D0\u05EA \u05D4\u05D4\u05D9\u05DE\u05D5\u05E8\u05D9\u05DD \u05E9\u05DC \u05DB\u05D5\u05DC\u05DD")), /* @__PURE__ */ import_react3.default.createElement("div", { className: "fixture-nav" }, /* @__PURE__ */ import_react3.default.createElement(FixtureNavigation, { fixture, allFixtures }), /* @__PURE__ */ import_react3.default.createElement("div", { className: "fixture-dropdown" }, /* @__PURE__ */ import_react3.default.createElement(
       "button",
       {
-        className: "btn btn-default dropdown-toggle",
+        className: "fixture-nav-btn",
         type: "button",
         onClick: () => setDropdownOpen(!dropdownOpen)
       },
       "\u05D1\u05D7\u05E8 \u05DE\u05D7\u05D6\u05D5\u05E8 ",
-      /* @__PURE__ */ import_react2.default.createElement("span", { className: "caret" })
-    ), dropdownOpen && /* @__PURE__ */ import_react2.default.createElement(
-      "ul",
+      /* @__PURE__ */ import_react3.default.createElement("span", { style: { marginRight: "4px" } }, "\u25BC")
+    ), dropdownOpen && /* @__PURE__ */ import_react3.default.createElement("div", { className: "fixture-dropdown-menu" }, allFixtures.map((f) => /* @__PURE__ */ import_react3.default.createElement(
+      Link,
       {
-        className: "dropdown-menu",
-        style: { display: "block" }
+        key: f.number,
+        to: `/bets/${f.league_id}/${f.number}`,
+        className: "fixture-dropdown-item",
+        onClick: () => setDropdownOpen(false)
       },
-      allFixtures.map((f) => /* @__PURE__ */ import_react2.default.createElement("li", { key: f.number }, /* @__PURE__ */ import_react2.default.createElement(
-        Link,
-        {
-          to: `/bets/${f.league_id}/${f.number}`,
-          onClick: () => setDropdownOpen(false)
-        },
-        "\u05DE\u05D7\u05D6\u05D5\u05E8 ",
-        f.number
-      )))
-    ))), currentUser?.is_admin && /* @__PURE__ */ import_react2.default.createElement("div", { className: "admin-controls", style: { marginTop: "20px" } }, /* @__PURE__ */ import_react2.default.createElement(
+      "\u05DE\u05D7\u05D6\u05D5\u05E8 ",
+      f.number
+    ))))), currentUser?.is_admin && /* @__PURE__ */ import_react3.default.createElement("div", { className: "admin-controls" }, /* @__PURE__ */ import_react3.default.createElement(
       "button",
       {
-        className: "btn btn-warning",
+        className: "admin-btn",
         onClick: handleToggleOpen
       },
       fixture.is_open ? "\u05E1\u05D2\u05D5\u05E8 \u05DE\u05D7\u05D6\u05D5\u05E8" : "\u05E4\u05EA\u05D7 \u05DE\u05D7\u05D6\u05D5\u05E8"
-    ), /* @__PURE__ */ import_react2.default.createElement("br", null), /* @__PURE__ */ import_react2.default.createElement(
+    ), /* @__PURE__ */ import_react3.default.createElement(
       "a",
       {
         href: "#",
@@ -24297,7 +24474,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           e.preventDefault();
           handleRunMigration();
         },
-        style: { marginTop: "10px", display: "inline-block" }
+        className: "admin-link"
       },
       "\u05D4\u05E8\u05E5 \u05DE\u05D9\u05D2\u05E8\u05E6\u05D9\u05D4"
     )));
@@ -24306,18 +24483,18 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     const currentIndex = allFixtures.findIndex((f) => f.number === fixture.number);
     const prevFixture = currentIndex > 0 ? allFixtures[currentIndex - 1] : null;
     const nextFixture = currentIndex < allFixtures.length - 1 ? allFixtures[currentIndex + 1] : null;
-    return /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, prevFixture && /* @__PURE__ */ import_react2.default.createElement(
+    return /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, prevFixture && /* @__PURE__ */ import_react3.default.createElement(
       Link,
       {
         to: `/bets/${prevFixture.league_id}/${prevFixture.number}`,
-        className: "btn btn-default btn-sm"
+        className: "fixture-nav-btn"
       },
       "\u2192 \u05DE\u05D7\u05D6\u05D5\u05E8 \u05E7\u05D5\u05D3\u05DD"
-    ), " ", nextFixture && /* @__PURE__ */ import_react2.default.createElement(
+    ), nextFixture && /* @__PURE__ */ import_react3.default.createElement(
       Link,
       {
         to: `/bets/${nextFixture.league_id}/${nextFixture.number}`,
-        className: "btn btn-default btn-sm"
+        className: "fixture-nav-btn"
       },
       "\u05DE\u05D7\u05D6\u05D5\u05E8 \u05D4\u05D1\u05D0 \u2190"
     ));
@@ -24332,7 +24509,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }
 
   // app/javascript/components/Scores/ScoreTable.js
-  var import_react3 = __toESM(require_react());
+  var import_react4 = __toESM(require_react());
   var RANK_ICONS = {
     1: "\u{1F3C6}",
     2: "\u{1F948}",
@@ -24362,8 +24539,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }
     .score-table-main th,
     .score-table-main td {
-      padding: 6px 4px !important;
-      font-size: 0.85em !important;
+      padding: 8px 6px !important;
+      font-size: 0.9em !important;
     }
     .hide-on-mobile {
       display: none !important;
@@ -24378,21 +24555,28 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     .mini-chart-container {
       overflow-x: auto;
     }
+    .score-page-header {
+      padding: var(--space-md) !important;
+    }
+    .league-dropdown-btn {
+      min-height: 48px !important;
+      padding: 12px 16px !important;
+    }
   }
 `;
   function ScoreTable() {
     const params = useParams();
     const leagueId = params.leagueId || 10;
-    const [loading, setLoading] = (0, import_react3.useState)(true);
-    const [error, setError] = (0, import_react3.useState)(null);
-    const [data2, setData] = (0, import_react3.useState)(null);
-    const [dropdownOpen, setDropdownOpen] = (0, import_react3.useState)(false);
-    const [expandedRow, setExpandedRow] = (0, import_react3.useState)(null);
-    const [sortBy, setSortBy] = (0, import_react3.useState)("total");
-    const [sortAsc, setSortAsc] = (0, import_react3.useState)(false);
-    const chartRef = (0, import_react3.useRef)(null);
-    const chartInstance = (0, import_react3.useRef)(null);
-    (0, import_react3.useEffect)(() => {
+    const [loading, setLoading] = (0, import_react4.useState)(true);
+    const [error, setError] = (0, import_react4.useState)(null);
+    const [data2, setData] = (0, import_react4.useState)(null);
+    const [dropdownOpen, setDropdownOpen] = (0, import_react4.useState)(false);
+    const [expandedRow, setExpandedRow] = (0, import_react4.useState)(null);
+    const [sortBy, setSortBy] = (0, import_react4.useState)("total");
+    const [sortAsc, setSortAsc] = (0, import_react4.useState)(false);
+    const chartRef = (0, import_react4.useRef)(null);
+    const chartInstance = (0, import_react4.useRef)(null);
+    (0, import_react4.useEffect)(() => {
       const styleId = "score-table-mobile-styles";
       if (!document.getElementById(styleId)) {
         const style = document.createElement("style");
@@ -24401,7 +24585,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         document.head.appendChild(style);
       }
     }, []);
-    (0, import_react3.useEffect)(() => {
+    (0, import_react4.useEffect)(() => {
       const loadScores = async () => {
         try {
           setLoading(true);
@@ -24416,7 +24600,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       };
       loadScores();
     }, [leagueId]);
-    (0, import_react3.useEffect)(() => {
+    (0, import_react4.useEffect)(() => {
       if (!data2?.graph_data || !chartRef.current) return;
       const loadChart = async () => {
         if (!window.Chart) {
@@ -24518,17 +24702,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       setExpandedRow(expandedRow === userName ? null : userName);
     };
     if (loading) {
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "text-center", style: { padding: "50px" } }, /* @__PURE__ */ import_react3.default.createElement("p", null, "\u05D8\u05D5\u05E2\u05DF..."));
+      return /* @__PURE__ */ import_react4.default.createElement(LoadingSpinner, { text: "\u05D8\u05D5\u05E2\u05DF \u05D8\u05D1\u05DC\u05D4..." });
     }
     if (error) {
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "alert alert-danger" }, error);
+      return /* @__PURE__ */ import_react4.default.createElement("div", { className: "alert alert-error" }, error);
     }
     if (!data2) {
-      return /* @__PURE__ */ import_react3.default.createElement("div", { className: "alert alert-warning" }, "\u05D0\u05D9\u05DF \u05E0\u05EA\u05D5\u05E0\u05D9\u05DD");
+      return /* @__PURE__ */ import_react4.default.createElement("div", { className: "alert alert-warning" }, "\u05D0\u05D9\u05DF \u05E0\u05EA\u05D5\u05E0\u05D9\u05DD");
     }
     const sortedScores = getSortedScores();
     const top3 = data2.scores.slice(0, 3);
-    return /* @__PURE__ */ import_react3.default.createElement("div", { className: "score-table", dir: "rtl" }, /* @__PURE__ */ import_react3.default.createElement("div", { style: { marginBottom: "20px" } }, /* @__PURE__ */ import_react3.default.createElement("h1", { style: { fontSize: "clamp(1.5rem, 5vw, 2rem)" } }, data2.league.name), /* @__PURE__ */ import_react3.default.createElement("div", { className: "dropdown", style: { position: "relative", display: "inline-block" } }, "\u05DC\u05DA \u05DC\u05DC\u05D9\u05D2\u05D4", " ", /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "score-table", dir: "rtl" }, /* @__PURE__ */ import_react4.default.createElement("div", { style: { marginBottom: "20px" } }, /* @__PURE__ */ import_react4.default.createElement("h1", { style: { fontSize: "clamp(1.5rem, 5vw, 2rem)" } }, data2.league.name), /* @__PURE__ */ import_react4.default.createElement("div", { className: "dropdown", style: { position: "relative", display: "inline-block" } }, "\u05DC\u05DA \u05DC\u05DC\u05D9\u05D2\u05D4", " ", /* @__PURE__ */ import_react4.default.createElement(
       "button",
       {
         className: "btn btn-default dropdown-toggle",
@@ -24537,8 +24721,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         style: { minHeight: "44px" }
       },
       "\u05D1\u05D7\u05E8 \u05DC\u05D9\u05D2\u05D4 ",
-      /* @__PURE__ */ import_react3.default.createElement("span", { className: "caret" })
-    ), dropdownOpen && /* @__PURE__ */ import_react3.default.createElement("ul", { className: "dropdown-menu", style: { display: "block" } }, data2.all_leagues.map((league) => /* @__PURE__ */ import_react3.default.createElement("li", { key: league.id, style: { minHeight: "44px", display: "flex", alignItems: "center" } }, /* @__PURE__ */ import_react3.default.createElement(
+      /* @__PURE__ */ import_react4.default.createElement("span", { className: "caret" })
+    ), dropdownOpen && /* @__PURE__ */ import_react4.default.createElement("ul", { className: "dropdown-menu", style: { display: "block" } }, data2.all_leagues.map((league) => /* @__PURE__ */ import_react4.default.createElement("li", { key: league.id, style: { minHeight: "44px", display: "flex", alignItems: "center" } }, /* @__PURE__ */ import_react4.default.createElement(
       Link,
       {
         to: `/scores/${league.id}`,
@@ -24546,7 +24730,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         style: { padding: "10px 15px", display: "block", width: "100%" }
       },
       league.name
-    )))))), top3.length >= 3 && /* @__PURE__ */ import_react3.default.createElement(
+    )))))), top3.length >= 3 && /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
         className: "podium-container",
@@ -24560,10 +24744,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           flexWrap: "wrap"
         }
       },
-      /* @__PURE__ */ import_react3.default.createElement(PodiumCard, { user: top3[1], rank: 2 }),
-      /* @__PURE__ */ import_react3.default.createElement(PodiumCard, { user: top3[0], rank: 1 }),
-      /* @__PURE__ */ import_react3.default.createElement(PodiumCard, { user: top3[2], rank: 3 })
-    ), /* @__PURE__ */ import_react3.default.createElement("div", { className: "h-scroller", style: { WebkitOverflowScrolling: "touch" } }, /* @__PURE__ */ import_react3.default.createElement("table", { className: "table table-hover score-table-main", style: { marginBottom: "30px" } }, /* @__PURE__ */ import_react3.default.createElement("thead", null, /* @__PURE__ */ import_react3.default.createElement("tr", null, /* @__PURE__ */ import_react3.default.createElement(SortableHeader, { column: "user", label: "#", sortBy, sortAsc, onSort: handleSort }), /* @__PURE__ */ import_react3.default.createElement("th", null, "\u05E9\u05D7\u05E7\u05DF"), /* @__PURE__ */ import_react3.default.createElement(SortableHeader, { column: "accuracy", label: "%", sortBy, sortAsc, onSort: handleSort }), /* @__PURE__ */ import_react3.default.createElement("th", { className: "hide-on-mobile" }, "\u05E4\u05D5\u05E8\u05DE\u05D4"), /* @__PURE__ */ import_react3.default.createElement("th", { className: "hide-on-mobile" }, "\u05DE\u05D7\u05D6\u05D5\u05E8 \u05DE\u05D5\u05E6\u05DC\u05D7"), data2.table_head.slice(1, -1).map((header, index) => /* @__PURE__ */ import_react3.default.createElement(
+      /* @__PURE__ */ import_react4.default.createElement(PodiumCard, { user: top3[1], rank: 2 }),
+      /* @__PURE__ */ import_react4.default.createElement(PodiumCard, { user: top3[0], rank: 1 }),
+      /* @__PURE__ */ import_react4.default.createElement(PodiumCard, { user: top3[2], rank: 3 })
+    ), /* @__PURE__ */ import_react4.default.createElement("div", { className: "h-scroller", style: { WebkitOverflowScrolling: "touch" } }, /* @__PURE__ */ import_react4.default.createElement("table", { className: "table table-hover score-table-main", style: { marginBottom: "30px" } }, /* @__PURE__ */ import_react4.default.createElement("thead", null, /* @__PURE__ */ import_react4.default.createElement("tr", null, /* @__PURE__ */ import_react4.default.createElement(SortableHeader, { column: "user", label: "#", sortBy, sortAsc, onSort: handleSort }), /* @__PURE__ */ import_react4.default.createElement("th", null, "\u05E9\u05D7\u05E7\u05DF"), /* @__PURE__ */ import_react4.default.createElement(SortableHeader, { column: "accuracy", label: "%", sortBy, sortAsc, onSort: handleSort }), /* @__PURE__ */ import_react4.default.createElement("th", { className: "hide-on-mobile" }, "\u05E4\u05D5\u05E8\u05DE\u05D4"), /* @__PURE__ */ import_react4.default.createElement("th", { className: "hide-on-mobile" }, "\u05DE\u05D7\u05D6\u05D5\u05E8 \u05DE\u05D5\u05E6\u05DC\u05D7"), data2.table_head.slice(1, -1).map((header, index) => /* @__PURE__ */ import_react4.default.createElement(
       SortableHeader,
       {
         key: index,
@@ -24574,10 +24758,10 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         onSort: handleSort,
         className: "hide-on-mobile"
       }
-    )), /* @__PURE__ */ import_react3.default.createElement(SortableHeader, { column: "total", label: '\u05E1\u05D4"\u05DB', sortBy, sortAsc, onSort: handleSort }))), /* @__PURE__ */ import_react3.default.createElement("tbody", null, sortedScores.map((row, rowIndex) => {
+    )), /* @__PURE__ */ import_react4.default.createElement(SortableHeader, { column: "total", label: '\u05E1\u05D4"\u05DB', sortBy, sortAsc, onSort: handleSort }))), /* @__PURE__ */ import_react4.default.createElement("tbody", null, sortedScores.map((row, rowIndex) => {
       const originalRank = data2.scores.findIndex((s) => s.user === row.user) + 1;
       const isExpanded = expandedRow === row.user;
-      return /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, { key: row.user }, /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ import_react4.default.createElement(import_react4.default.Fragment, { key: row.user }, /* @__PURE__ */ import_react4.default.createElement(
         "tr",
         {
           onClick: () => toggleRowExpand(row.user),
@@ -24588,11 +24772,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           },
           title: "\u05DC\u05D7\u05E5 \u05DC\u05D4\u05E8\u05D7\u05D1\u05D4"
         },
-        /* @__PURE__ */ import_react3.default.createElement("td", { style: { fontWeight: "bold", minWidth: "30px" } }, RANK_ICONS[originalRank] || originalRank),
-        /* @__PURE__ */ import_react3.default.createElement("td", { style: { fontWeight: originalRank <= 3 ? "bold" : "normal" } }, row.user, /* @__PURE__ */ import_react3.default.createElement("span", { style: { opacity: 0.5, fontSize: "0.8em" } }, isExpanded ? " \u25B2" : " \u25BC")),
-        /* @__PURE__ */ import_react3.default.createElement("td", null, /* @__PURE__ */ import_react3.default.createElement(AccuracyBadge, { accuracy: row.accuracy })),
-        /* @__PURE__ */ import_react3.default.createElement("td", { className: "hide-on-mobile" }, /* @__PURE__ */ import_react3.default.createElement(FormGuide, { form: row.form_guide })),
-        /* @__PURE__ */ import_react3.default.createElement("td", { className: "hide-on-mobile" }, row.best_fixture && /* @__PURE__ */ import_react3.default.createElement(
+        /* @__PURE__ */ import_react4.default.createElement("td", { style: { fontWeight: "bold", minWidth: "30px" } }, RANK_ICONS[originalRank] || originalRank),
+        /* @__PURE__ */ import_react4.default.createElement("td", { style: { fontWeight: originalRank <= 3 ? "bold" : "normal" } }, row.user, /* @__PURE__ */ import_react4.default.createElement("span", { style: { opacity: 0.5, fontSize: "0.8em" } }, isExpanded ? " \u25B2" : " \u25BC")),
+        /* @__PURE__ */ import_react4.default.createElement("td", null, /* @__PURE__ */ import_react4.default.createElement(AccuracyBadge, { accuracy: row.accuracy })),
+        /* @__PURE__ */ import_react4.default.createElement("td", { className: "hide-on-mobile" }, /* @__PURE__ */ import_react4.default.createElement(FormGuide, { form: row.form_guide })),
+        /* @__PURE__ */ import_react4.default.createElement("td", { className: "hide-on-mobile" }, row.best_fixture && /* @__PURE__ */ import_react4.default.createElement(
           "span",
           {
             className: "label label-success",
@@ -24603,7 +24787,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           row.best_fixture.success,
           ")"
         )),
-        row.fixtures.slice(0, -1).map((fixture, colIndex) => /* @__PURE__ */ import_react3.default.createElement(
+        row.fixtures.slice(0, -1).map((fixture, colIndex) => /* @__PURE__ */ import_react4.default.createElement(
           "td",
           {
             key: colIndex,
@@ -24616,24 +24800,24 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           },
           fixture.success
         )),
-        /* @__PURE__ */ import_react3.default.createElement("td", { style: { fontWeight: "bold", fontSize: "1.1em" } }, row.total_success)
-      ), isExpanded && /* @__PURE__ */ import_react3.default.createElement("tr", null, /* @__PURE__ */ import_react3.default.createElement("td", { colSpan: data2.table_head.length + 4, style: {
+        /* @__PURE__ */ import_react4.default.createElement("td", { style: { fontWeight: "bold", fontSize: "1.1em" } }, row.total_success)
+      ), isExpanded && /* @__PURE__ */ import_react4.default.createElement("tr", null, /* @__PURE__ */ import_react4.default.createElement("td", { colSpan: data2.table_head.length + 4, style: {
         backgroundColor: "#f9f9f9",
         padding: "15px"
-      } }, /* @__PURE__ */ import_react3.default.createElement(ExpandedDetails, { row, tableHead: data2.table_head }))));
-    })))), /* @__PURE__ */ import_react3.default.createElement("div", { style: {
+      } }, /* @__PURE__ */ import_react4.default.createElement(ExpandedDetails, { row, tableHead: data2.table_head }))));
+    })))), /* @__PURE__ */ import_react4.default.createElement("div", { style: {
       marginTop: "30px",
       padding: "15px",
       backgroundColor: "#fff",
       borderRadius: "8px",
       overflowX: "auto",
       WebkitOverflowScrolling: "touch"
-    } }, /* @__PURE__ */ import_react3.default.createElement("canvas", { ref: chartRef, style: { maxWidth: "100%", height: "auto" } })));
+    } }, /* @__PURE__ */ import_react4.default.createElement("canvas", { ref: chartRef, style: { maxWidth: "100%", height: "auto" } })));
   }
   function PodiumCard({ user, rank }) {
     const heights = { 1: 120, 2: 90, 3: 70 };
     const colors = { 1: "#FFD700", 2: "#C0C0C0", 3: "#CD7F32" };
-    return /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
         className: "podium-card",
@@ -24643,8 +24827,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           flexShrink: 0
         }
       },
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { fontSize: rank === 1 ? "2.5em" : "1.8em", marginBottom: "8px" } }, RANK_ICONS[rank]),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: {
+      /* @__PURE__ */ import_react4.default.createElement("div", { style: { fontSize: rank === 1 ? "2.5em" : "1.8em", marginBottom: "8px" } }, RANK_ICONS[rank]),
+      /* @__PURE__ */ import_react4.default.createElement("div", { style: {
         fontWeight: "bold",
         fontSize: rank === 1 ? "1.1em" : "1em",
         marginBottom: "8px",
@@ -24652,7 +24836,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         textOverflow: "ellipsis",
         whiteSpace: "nowrap"
       } }, user.user),
-      /* @__PURE__ */ import_react3.default.createElement(
+      /* @__PURE__ */ import_react4.default.createElement(
         "div",
         {
           className: "podium-bar",
@@ -24669,15 +24853,15 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
             boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
           }
         },
-        /* @__PURE__ */ import_react3.default.createElement("div", { style: { fontSize: "1.3em" } }, user.total_success),
-        /* @__PURE__ */ import_react3.default.createElement("div", { style: { fontSize: "0.7em", opacity: 0.8 } }, "\u05E0\u05E7\u05D5\u05D3\u05D5\u05EA"),
-        /* @__PURE__ */ import_react3.default.createElement("div", { style: { fontSize: "0.8em", marginTop: "3px" } }, user.accuracy, "%")
+        /* @__PURE__ */ import_react4.default.createElement("div", { style: { fontSize: "1.3em" } }, user.total_success),
+        /* @__PURE__ */ import_react4.default.createElement("div", { style: { fontSize: "0.7em", opacity: 0.8 } }, "\u05E0\u05E7\u05D5\u05D3\u05D5\u05EA"),
+        /* @__PURE__ */ import_react4.default.createElement("div", { style: { fontSize: "0.8em", marginTop: "3px" } }, user.accuracy, "%")
       )
     );
   }
   function SortableHeader({ column, label, sortBy, sortAsc, onSort, className }) {
     const isActive = sortBy === column;
-    return /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement(
       "th",
       {
         onClick: () => onSort(column),
@@ -24692,7 +24876,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         title: "\u05DC\u05D7\u05E5 \u05DC\u05DE\u05D9\u05D5\u05DF"
       },
       label,
-      isActive && /* @__PURE__ */ import_react3.default.createElement("span", { style: { marginRight: "3px", fontSize: "0.8em" } }, sortAsc ? "\u2191" : "\u2193")
+      isActive && /* @__PURE__ */ import_react4.default.createElement("span", { style: { marginRight: "3px", fontSize: "0.8em" } }, sortAsc ? "\u2191" : "\u2193")
     );
   }
   function AccuracyBadge({ accuracy }) {
@@ -24701,11 +24885,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     else if (accuracy >= 45) badgeClass = "label-info";
     else if (accuracy >= 30) badgeClass = "label-warning";
     else badgeClass = "label-danger";
-    return /* @__PURE__ */ import_react3.default.createElement("span", { className: `label ${badgeClass}`, style: { fontSize: "0.85em", padding: "4px 6px" } }, accuracy, "%");
+    return /* @__PURE__ */ import_react4.default.createElement("span", { className: `label ${badgeClass}`, style: { fontSize: "0.85em", padding: "4px 6px" } }, accuracy, "%");
   }
   function FormGuide({ form }) {
     if (!form || form.length === 0) return null;
-    return /* @__PURE__ */ import_react3.default.createElement("div", { style: { display: "flex", gap: "2px", justifyContent: "center" } }, form.map((result, index) => /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement("div", { style: { display: "flex", gap: "2px", justifyContent: "center" } }, form.map((result, index) => /* @__PURE__ */ import_react4.default.createElement(
       "span",
       {
         key: index,
@@ -24739,7 +24923,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     const bestFixture = fixtureData.reduce((best, curr) => curr.success > (best?.success || 0) ? curr : best, null);
     const worstFixture = fixtureData.reduce((worst, curr) => curr.success < (worst?.success || Infinity) ? curr : worst, null);
     const avgPerFixture = row.total_games > 0 ? (row.total_success / fixtureData.length).toFixed(1) : 0;
-    return /* @__PURE__ */ import_react3.default.createElement("div", { dir: "rtl" }, /* @__PURE__ */ import_react3.default.createElement("h4", { style: { marginBottom: "15px", fontSize: "clamp(1rem, 4vw, 1.25rem)" } }, "\u{1F4CA} \u05E1\u05D8\u05D8\u05D9\u05E1\u05D8\u05D9\u05E7\u05D5\u05EA - ", row.user), /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement("div", { dir: "rtl" }, /* @__PURE__ */ import_react4.default.createElement("h4", { style: { marginBottom: "15px", fontSize: "clamp(1rem, 4vw, 1.25rem)" } }, "\u{1F4CA} \u05E1\u05D8\u05D8\u05D9\u05E1\u05D8\u05D9\u05E7\u05D5\u05EA - ", row.user), /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
         className: "stat-boxes",
@@ -24751,11 +24935,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           justifyContent: "flex-start"
         }
       },
-      /* @__PURE__ */ import_react3.default.createElement(StatBox, { label: "\u05DE\u05E9\u05D7\u05E7\u05D9\u05DD", value: row.total_games }),
-      /* @__PURE__ */ import_react3.default.createElement(StatBox, { label: "\u05E0\u05DB\u05D5\u05E0\u05D9\u05DD", value: row.total_success }),
-      /* @__PURE__ */ import_react3.default.createElement(StatBox, { label: "\u05D0\u05D7\u05D5\u05D6", value: `${row.accuracy}%` }),
-      /* @__PURE__ */ import_react3.default.createElement(StatBox, { label: "\u05DE\u05DE\u05D5\u05E6\u05E2", value: avgPerFixture }),
-      /* @__PURE__ */ import_react3.default.createElement(
+      /* @__PURE__ */ import_react4.default.createElement(StatBox, { label: "\u05DE\u05E9\u05D7\u05E7\u05D9\u05DD", value: row.total_games }),
+      /* @__PURE__ */ import_react4.default.createElement(StatBox, { label: "\u05E0\u05DB\u05D5\u05E0\u05D9\u05DD", value: row.total_success }),
+      /* @__PURE__ */ import_react4.default.createElement(StatBox, { label: "\u05D0\u05D7\u05D5\u05D6", value: `${row.accuracy}%` }),
+      /* @__PURE__ */ import_react4.default.createElement(StatBox, { label: "\u05DE\u05DE\u05D5\u05E6\u05E2", value: avgPerFixture }),
+      /* @__PURE__ */ import_react4.default.createElement(
         StatBox,
         {
           label: "\u05D4\u05DB\u05D9 \u05D8\u05D5\u05D1",
@@ -24763,7 +24947,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           color: "#5cb85c"
         }
       ),
-      /* @__PURE__ */ import_react3.default.createElement(
+      /* @__PURE__ */ import_react4.default.createElement(
         StatBox,
         {
           label: "\u05D4\u05DB\u05D9 \u05D7\u05DC\u05E9",
@@ -24771,7 +24955,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           color: "#d9534f"
         }
       )
-    ), /* @__PURE__ */ import_react3.default.createElement("div", { className: "mini-chart-container", style: { marginTop: "10px" } }, /* @__PURE__ */ import_react3.default.createElement("strong", null, "\u05D1\u05D9\u05E6\u05D5\u05E2\u05D9\u05DD \u05DC\u05E4\u05D9 \u05DE\u05D7\u05D6\u05D5\u05E8:"), /* @__PURE__ */ import_react3.default.createElement("div", { style: {
+    ), /* @__PURE__ */ import_react4.default.createElement("div", { className: "mini-chart-container", style: { marginTop: "10px" } }, /* @__PURE__ */ import_react4.default.createElement("strong", null, "\u05D1\u05D9\u05E6\u05D5\u05E2\u05D9\u05DD \u05DC\u05E4\u05D9 \u05DE\u05D7\u05D6\u05D5\u05E8:"), /* @__PURE__ */ import_react4.default.createElement("div", { style: {
       display: "flex",
       gap: "4px",
       marginTop: "10px",
@@ -24782,7 +24966,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     } }, fixtureData.map((fixture, index) => {
       const maxSuccess = Math.max(...fixtureData.map((f) => f.success || 0), 1);
       const height = (fixture.success || 0) / maxSuccess * 40 + 10;
-      return /* @__PURE__ */ import_react3.default.createElement(
+      return /* @__PURE__ */ import_react4.default.createElement(
         "div",
         {
           key: index,
@@ -24807,7 +24991,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }))));
   }
   function StatBox({ label, value, color }) {
-    return /* @__PURE__ */ import_react3.default.createElement(
+    return /* @__PURE__ */ import_react4.default.createElement(
       "div",
       {
         className: "stat-box",
@@ -24821,18 +25005,43 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           flex: "0 0 auto"
         }
       },
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { fontSize: "0.7em", color: "#666", marginBottom: "3px" } }, label),
-      /* @__PURE__ */ import_react3.default.createElement("div", { style: { fontSize: "1em", fontWeight: "bold", color: color || "#333" } }, value)
+      /* @__PURE__ */ import_react4.default.createElement("div", { style: { fontSize: "0.7em", color: "#666", marginBottom: "3px" } }, label),
+      /* @__PURE__ */ import_react4.default.createElement("div", { style: { fontSize: "1em", fontWeight: "bold", color: color || "#333" } }, value)
     );
   }
 
   // app/javascript/components/BettingApp.js
+  function LoadingSpinner({ text = "\u05D8\u05D5\u05E2\u05DF..." }) {
+    return /* @__PURE__ */ import_react5.default.createElement("div", { className: "loading-container" }, /* @__PURE__ */ import_react5.default.createElement("div", { className: "spinner" }), /* @__PURE__ */ import_react5.default.createElement("span", { className: "loading-text" }, text));
+  }
+  function BottomNav() {
+    const location = useLocation();
+    const path = location.pathname;
+    const isActive = (route) => {
+      if (route === "/bets") {
+        return path === "/" || path.startsWith("/bets");
+      }
+      return path.startsWith(route);
+    };
+    return /* @__PURE__ */ import_react5.default.createElement("nav", { className: "bottom-nav" }, /* @__PURE__ */ import_react5.default.createElement(Link, { to: "/bets", className: `bottom-nav-item ${isActive("/bets") ? "active" : ""}` }, /* @__PURE__ */ import_react5.default.createElement("span", { className: "bottom-nav-icon" }, "\u26BD"), /* @__PURE__ */ import_react5.default.createElement("span", { className: "bottom-nav-label" }, "\u05D4\u05D9\u05DE\u05D5\u05E8\u05D9\u05DD")), /* @__PURE__ */ import_react5.default.createElement(Link, { to: "/scores", className: `bottom-nav-item ${isActive("/scores") ? "active" : ""}` }, /* @__PURE__ */ import_react5.default.createElement("span", { className: "bottom-nav-icon" }, "\u{1F3C6}"), /* @__PURE__ */ import_react5.default.createElement("span", { className: "bottom-nav-label" }, "\u05D8\u05D1\u05DC\u05D4")), /* @__PURE__ */ import_react5.default.createElement("a", { href: "/classic/", className: "bottom-nav-item" }, /* @__PURE__ */ import_react5.default.createElement("span", { className: "bottom-nav-icon" }, "\u{1F4CB}"), /* @__PURE__ */ import_react5.default.createElement("span", { className: "bottom-nav-label" }, "\u05E7\u05DC\u05D0\u05E1\u05D9")));
+  }
+  function TopNav({ currentUser }) {
+    const location = useLocation();
+    const path = location.pathname;
+    const isActive = (route) => {
+      if (route === "/bets") {
+        return path === "/" || path.startsWith("/bets");
+      }
+      return path.startsWith(route);
+    };
+    return /* @__PURE__ */ import_react5.default.createElement("nav", { className: "top-nav" }, /* @__PURE__ */ import_react5.default.createElement("div", { className: "top-nav-content" }, /* @__PURE__ */ import_react5.default.createElement(Link, { to: "/", className: "top-nav-brand" }, "\u26BD Betting App"), /* @__PURE__ */ import_react5.default.createElement("ul", { className: "top-nav-links" }, /* @__PURE__ */ import_react5.default.createElement("li", null, /* @__PURE__ */ import_react5.default.createElement(Link, { to: "/bets", className: `top-nav-link ${isActive("/bets") ? "active" : ""}` }, "\u05D4\u05D9\u05DE\u05D5\u05E8\u05D9\u05DD")), /* @__PURE__ */ import_react5.default.createElement("li", null, /* @__PURE__ */ import_react5.default.createElement(Link, { to: "/scores", className: `top-nav-link ${isActive("/scores") ? "active" : ""}` }, "\u05D8\u05D1\u05DC\u05D4")), /* @__PURE__ */ import_react5.default.createElement("li", null, /* @__PURE__ */ import_react5.default.createElement("a", { href: "/classic/", className: "top-nav-link" }, "\u05D2\u05E8\u05E1\u05D4 \u05E7\u05DC\u05D0\u05E1\u05D9\u05EA"))), currentUser && /* @__PURE__ */ import_react5.default.createElement("span", { className: "top-nav-user" }, "\u{1F464} ", currentUser.name)));
+  }
   function BettingApp({ current_user, csrf_token, league_id, number }) {
-    return /* @__PURE__ */ import_react4.default.createElement(BrowserRouter, null, /* @__PURE__ */ import_react4.default.createElement("nav", { className: "navbar navbar-default" }, /* @__PURE__ */ import_react4.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react4.default.createElement("div", { className: "navbar-header" }, /* @__PURE__ */ import_react4.default.createElement(Link, { to: "/", className: "navbar-brand" }, "Betting App")), /* @__PURE__ */ import_react4.default.createElement("ul", { className: "nav navbar-nav" }, /* @__PURE__ */ import_react4.default.createElement("li", null, /* @__PURE__ */ import_react4.default.createElement(Link, { to: "/bets" }, "\u05D4\u05D9\u05DE\u05D5\u05E8\u05D9\u05DD")), /* @__PURE__ */ import_react4.default.createElement("li", null, /* @__PURE__ */ import_react4.default.createElement(Link, { to: "/scores" }, "\u05D8\u05D1\u05DC\u05D4"))), /* @__PURE__ */ import_react4.default.createElement("ul", { className: "nav navbar-nav navbar-right" }, current_user && /* @__PURE__ */ import_react4.default.createElement("li", { className: "navbar-text" }, "\u05DE\u05D7\u05D5\u05D1\u05E8: ", current_user.name), /* @__PURE__ */ import_react4.default.createElement("li", null, /* @__PURE__ */ import_react4.default.createElement("a", { href: "/classic/" }, "\u05D2\u05E8\u05E1\u05D4 \u05E7\u05DC\u05D0\u05E1\u05D9\u05EA"))))), /* @__PURE__ */ import_react4.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react4.default.createElement(Routes, null, /* @__PURE__ */ import_react4.default.createElement(
+    return /* @__PURE__ */ import_react5.default.createElement(BrowserRouter, null, /* @__PURE__ */ import_react5.default.createElement("div", { className: "betting-app", dir: "rtl" }, /* @__PURE__ */ import_react5.default.createElement(TopNav, { currentUser: current_user }), /* @__PURE__ */ import_react5.default.createElement("main", null, /* @__PURE__ */ import_react5.default.createElement(Routes, null, /* @__PURE__ */ import_react5.default.createElement(
       Route,
       {
         path: "/",
-        element: /* @__PURE__ */ import_react4.default.createElement(
+        element: /* @__PURE__ */ import_react5.default.createElement(
           BetsList,
           {
             leagueId: league_id,
@@ -24841,31 +25050,31 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           }
         )
       }
-    ), /* @__PURE__ */ import_react4.default.createElement(
+    ), /* @__PURE__ */ import_react5.default.createElement(
       Route,
       {
         path: "/bets",
-        element: /* @__PURE__ */ import_react4.default.createElement(BetsList, { csrfToken: csrf_token })
+        element: /* @__PURE__ */ import_react5.default.createElement(BetsList, { csrfToken: csrf_token })
       }
-    ), /* @__PURE__ */ import_react4.default.createElement(
+    ), /* @__PURE__ */ import_react5.default.createElement(
       Route,
       {
         path: "/bets/:leagueId/:fixtureNumber",
-        element: /* @__PURE__ */ import_react4.default.createElement(BetsList, { csrfToken: csrf_token })
+        element: /* @__PURE__ */ import_react5.default.createElement(BetsList, { csrfToken: csrf_token })
       }
-    ), /* @__PURE__ */ import_react4.default.createElement(
+    ), /* @__PURE__ */ import_react5.default.createElement(
       Route,
       {
         path: "/scores",
-        element: /* @__PURE__ */ import_react4.default.createElement(ScoreTable, null)
+        element: /* @__PURE__ */ import_react5.default.createElement(ScoreTable, null)
       }
-    ), /* @__PURE__ */ import_react4.default.createElement(
+    ), /* @__PURE__ */ import_react5.default.createElement(
       Route,
       {
         path: "/scores/:leagueId",
-        element: /* @__PURE__ */ import_react4.default.createElement(ScoreTable, null)
+        element: /* @__PURE__ */ import_react5.default.createElement(ScoreTable, null)
       }
-    ))));
+    ))), /* @__PURE__ */ import_react5.default.createElement(BottomNav, null)));
   }
 
   // app/javascript/application.js
@@ -24874,7 +25083,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     if (reactRoot) {
       const root = (0, import_client.createRoot)(reactRoot);
       const props = JSON.parse(reactRoot.dataset.props || "{}");
-      root.render(/* @__PURE__ */ import_react5.default.createElement(BettingApp, { ...props }));
+      root.render(/* @__PURE__ */ import_react6.default.createElement(BettingApp, { ...props }));
     }
   });
 })();

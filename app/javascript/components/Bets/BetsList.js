@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import api from '../../lib/api'
 import SingleMatch from './SingleMatch'
+import MatchCard from './MatchCard'
+import { LoadingSpinner } from '../BettingApp'
 
 export default function BetsList({ leagueId: propLeagueId, fixtureNumber: propNumber, csrfToken }) {
   const params = useParams()
@@ -118,24 +120,25 @@ export default function BetsList({ leagueId: propLeagueId, fixtureNumber: propNu
   }
 
   if (loading) {
-    return <div className="text-center"><p>טוען...</p></div>
+    return <LoadingSpinner text="טוען משחקים..." />
   }
 
   if (error) {
-    return <div className="alert alert-danger">{error}</div>
+    return <div className="alert alert-error">{error}</div>
   }
 
   if (!fixture) {
     return (
-      <div className="fixture" dir="rtl">
+      <div style={{ padding: '16px' }}>
         <div className="alert alert-warning">
           שמע אין מחזור כזה בינתיים... באסה
         </div>
         {currentUser?.is_admin && (
-          <div>
+          <div className="admin-controls">
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); handleRunMigration(); }}
+              className="admin-link"
             >
               הרץ מיגרציה
             </a>
@@ -175,20 +178,38 @@ export default function BetsList({ leagueId: propLeagueId, fixtureNumber: propNu
     : []
 
   return (
-    <div className="fixture" dir="rtl">
-      <h1>מחזור כדורגל {fixture.number}</h1>
+    <div dir="rtl">
+      {/* Page Header */}
+      <div className="page-header">
+        <h1 className="page-title">מחזור {fixture.number}</h1>
+        {fixture.can_still_bet && fixture.seconds_left_to_bet > 0 && (
+          <div className="time-left">
+            <span className="time-left-icon">⏱️</span>
+            {formatTimeLeft(fixture.seconds_left_to_bet)}
+          </div>
+        )}
+      </div>
 
-      {fixture.can_still_bet && fixture.seconds_left_to_bet > 0 && (
-        <p className="text-muted">
-          זמן שנותר להימור: {formatTimeLeft(fixture.seconds_left_to_bet)}
-        </p>
-      )}
+      {/* Mobile Card View */}
+      <div className="matches-container">
+        {matches.map(match => (
+          <MatchCard
+            key={match.id}
+            match={match}
+            bet={betsByMatchId[match.id]}
+            onBetUpdate={handleBetUpdate}
+            canBet={match.can_still_bet}
+            otherBets={showOtherBets ? otherBetsByMatchId[match.id] : null}
+          />
+        ))}
+      </div>
 
-      <div className="h-scroller">
-        <table className="table">
+      {/* Desktop Table View */}
+      <div className="matches-table-container">
+        <table className="matches-table">
           <thead>
             <tr>
-              <th className="hidden-sm hidden-xs">תאריך</th>
+              <th>תאריך</th>
               <th>בית</th>
               <th></th>
               <th>חוץ</th>
@@ -197,7 +218,6 @@ export default function BetsList({ leagueId: propLeagueId, fixtureNumber: propNu
               {showOtherBets && otherUsers.map(user => (
                 <th key={user.id}>{user.name}</th>
               ))}
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -215,67 +235,64 @@ export default function BetsList({ leagueId: propLeagueId, fixtureNumber: propNu
         </table>
       </div>
 
+      {/* Toggle Other Bets */}
       {!fixture.can_still_bet && otherUsersBets && (
-        <div className="checkbox">
-          <label>
-            <input
-              type="checkbox"
-              checked={showOtherBets}
-              onChange={(e) => setShowOtherBets(e.target.checked)}
-            />
+        <div className="toggle-container">
+          <input
+            type="checkbox"
+            id="showOtherBets"
+            className="toggle-checkbox"
+            checked={showOtherBets}
+            onChange={(e) => setShowOtherBets(e.target.checked)}
+          />
+          <label htmlFor="showOtherBets" className="toggle-label">
             תראה את ההימורים של כולם
           </label>
         </div>
       )}
 
-      <br />
-
-      <div className="row">
-        <div className="col-md-2">
-          <FixtureNavigation fixture={fixture} allFixtures={allFixtures} />
-        </div>
-        <div className="dropdown col-md-2" style={{ position: 'relative' }}>
-          לך למחזור{' '}
+      {/* Fixture Navigation */}
+      <div className="fixture-nav">
+        <FixtureNavigation fixture={fixture} allFixtures={allFixtures} />
+        
+        <div className="fixture-dropdown">
           <button
-            className="btn btn-default dropdown-toggle"
+            className="fixture-nav-btn"
             type="button"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            בחר מחזור <span className="caret"></span>
+            בחר מחזור <span style={{ marginRight: '4px' }}>▼</span>
           </button>
           {dropdownOpen && (
-            <ul
-              className="dropdown-menu"
-              style={{ display: 'block' }}
-            >
+            <div className="fixture-dropdown-menu">
               {allFixtures.map(f => (
-                <li key={f.number}>
-                  <Link
-                    to={`/bets/${f.league_id}/${f.number}`}
-                    onClick={() => setDropdownOpen(false)}
-                  >
-                    מחזור {f.number}
-                  </Link>
-                </li>
+                <Link
+                  key={f.number}
+                  to={`/bets/${f.league_id}/${f.number}`}
+                  className="fixture-dropdown-item"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  מחזור {f.number}
+                </Link>
               ))}
-            </ul>
+            </div>
           )}
         </div>
       </div>
 
+      {/* Admin Controls */}
       {currentUser?.is_admin && (
-        <div className="admin-controls" style={{ marginTop: '20px' }}>
+        <div className="admin-controls">
           <button
-            className="btn btn-warning"
+            className="admin-btn"
             onClick={handleToggleOpen}
           >
             {fixture.is_open ? 'סגור מחזור' : 'פתח מחזור'}
           </button>
-          <br />
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); handleRunMigration(); }}
-            style={{ marginTop: '10px', display: 'inline-block' }}
+            className="admin-link"
           >
             הרץ מיגרציה
           </a>
@@ -295,16 +312,15 @@ function FixtureNavigation({ fixture, allFixtures }) {
       {prevFixture && (
         <Link
           to={`/bets/${prevFixture.league_id}/${prevFixture.number}`}
-          className="btn btn-default btn-sm"
+          className="fixture-nav-btn"
         >
           → מחזור קודם
         </Link>
       )}
-      {' '}
       {nextFixture && (
         <Link
           to={`/bets/${nextFixture.league_id}/${nextFixture.number}`}
-          className="btn btn-default btn-sm"
+          className="fixture-nav-btn"
         >
           מחזור הבא ←
         </Link>
