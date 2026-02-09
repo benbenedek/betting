@@ -48,6 +48,9 @@ end
 
 gem 'sprockets_better_errors'
 
+# Modern JavaScript bundling for React (runs alongside Sprockets)
+gem 'jsbundling-rails'
+
 group :production do
   gem 'thin', '1.8.0'
   gem 'rails_12factor'

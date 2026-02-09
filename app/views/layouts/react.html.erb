@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Betting App - React</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag rescue nil %>
+
+    <%# Use existing Bootstrap CSS from the legacy app %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+
+  <body>
+    <%# React mounts here %>
+    <div id="react-root" data-props="<%= @react_props.to_json %>"></div>
+
+    <%# Link back to legacy version %>
+    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
+      <%= link_to '← חזור לגרסה הקלאסית', root_path, class: 'btn btn-sm btn-secondary' %>
+    </div>
+
+    <%# Load React bundle separately (not through Sprockets) %>
+    <script src="/react-assets/application.js"></script>
+  </body>
+</html>
