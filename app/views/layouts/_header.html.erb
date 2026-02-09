@@ -12,8 +12,9 @@
         <div id="playnavbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <% if logged_in? %>
-                <li><%= link_to "הימורים", root_path %></li>
-                <li><%= link_to "טבלת ניקוד", scores_path %></li>
+                <li><%= link_to "הימורים", classic_root_path %></li>
+                <li><%= link_to "טבלת ניקוד", classic_scores_path %></li>
+                <li><%= link_to "גרסת React", root_path %></li>
                 <li><%= link_to "התנתק", logout_path %></li>
             <% else %>
                 <li><%= link_to "התחבר", login_path %></li>

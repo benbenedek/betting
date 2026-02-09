@@ -9,6 +9,6 @@ module BetsHelper
   end
 
   def link_to_league_fixture(league_id, fixture_id)
-    index_path(league_id: league_id, number: fixture_id)
+    classic_index_path(league_id: league_id, number: fixture_id)
   end
 end

@@ -6,7 +6,7 @@
     <span class="caret"></span></button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
       <% League.all.each { |league| %>
-        <li role="presentation"><%= link_to league.pretty_name, scoretable_path(league_id: league.id), :class=>"loader-ajax-link" %></li>
+        <li role="presentation"><%= link_to league.pretty_name, classic_scoretable_path(league_id: league.id), :class=>"loader-ajax-link" %></li>
       <% } %>
     </ul>
   </div>

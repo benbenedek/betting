@@ -38,18 +38,18 @@ class Api::V1::ScoresController < Api::V1::BaseController
       # Calculate stats
       fixture_list = fixtures.reject { |k, _| k == :total }
       total_data = fixtures[:total] || { games: 0, success: 0 }
-      
+
       total_games = total_data[:games].to_i
       total_success = total_data[:success].to_i
       accuracy = total_games > 0 ? (total_success.to_f / total_games * 100).round(1) : 0
-      
+
       # Find best fixture
       best_fixture = fixture_list.max_by { |_, data| data[:success].to_i }
-      best_fixture_info = best_fixture ? { 
-        number: best_fixture[0].to_s, 
-        success: best_fixture[1][:success] 
+      best_fixture_info = best_fixture ? {
+        number: best_fixture[0].to_s,
+        success: best_fixture[1][:success]
       } : nil
-      
+
       # Form guide (last 5 fixtures)
       recent_fixtures = fixture_list.to_a.last(5)
       form_guide = recent_fixtures.map do |fixture_key, data|
@@ -58,7 +58,7 @@ class Api::V1::ScoresController < Api::V1::BaseController
         # Consider good if got more than half right
         games > 0 && success >= (games / 2.0).ceil ? 'W' : 'L'
       end
-      
+
       {
         user: user_name,
         rank: index + 1,

@@ -172,10 +172,10 @@ export default function ScoreTable() {
   // Sort scores
   const getSortedScores = () => {
     if (!data?.scores) return []
-    
+
     const sorted = [...data.scores].sort((a, b) => {
       let aVal, bVal
-      
+
       if (sortBy === 'total') {
         aVal = a.total_success
         bVal = b.total_success
@@ -193,10 +193,10 @@ export default function ScoreTable() {
         aVal = aFixture?.success || 0
         bVal = bFixture?.success || 0
       }
-      
+
       return sortAsc ? aVal - bVal : bVal - aVal
     })
-    
+
     return sorted
   }
 
@@ -247,8 +247,8 @@ export default function ScoreTable() {
             <ul className="dropdown-menu" style={{ display: 'block' }}>
               {data.all_leagues.map(league => (
                 <li key={league.id} style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}>
-                  <Link 
-                    to={`/scores/${league.id}`} 
+                  <Link
+                    to={`/scores/${league.id}`}
                     onClick={() => setDropdownOpen(false)}
                     style={{ padding: '10px 15px', display: 'block', width: '100%' }}
                   >
@@ -263,7 +263,7 @@ export default function ScoreTable() {
 
       {/* Podium for Top 3 */}
       {top3.length >= 3 && (
-        <div 
+        <div
           className="podium-container"
           style={{
             display: 'flex',
@@ -295,12 +295,12 @@ export default function ScoreTable() {
               <th className="hide-on-mobile">פורמה</th>
               <th className="hide-on-mobile">מחזור מוצלח</th>
               {data.table_head.slice(1, -1).map((header, index) => (
-                <SortableHeader 
-                  key={index} 
-                  column={header} 
-                  label={header} 
-                  sortBy={sortBy} 
-                  sortAsc={sortAsc} 
+                <SortableHeader
+                  key={index}
+                  column={header}
+                  label={header}
+                  sortBy={sortBy}
+                  sortAsc={sortAsc}
                   onSort={handleSort}
                   className="hide-on-mobile"
                 />
@@ -312,10 +312,10 @@ export default function ScoreTable() {
             {sortedScores.map((row, rowIndex) => {
               const originalRank = data.scores.findIndex(s => s.user === row.user) + 1
               const isExpanded = expandedRow === row.user
-              
+
               return (
                 <React.Fragment key={row.user}>
-                  <tr 
+                  <tr
                     onClick={() => toggleRowExpand(row.user)}
                     style={{
                       background: RANK_COLORS[originalRank] || 'transparent',
@@ -339,7 +339,7 @@ export default function ScoreTable() {
                     </td>
                     <td className="hide-on-mobile">
                       {row.best_fixture && (
-                        <span 
+                        <span
                           className="label label-success"
                           title={`${row.best_fixture.success} נקודות במחזור ${row.best_fixture.number}`}
                         >
@@ -348,7 +348,7 @@ export default function ScoreTable() {
                       )}
                     </td>
                     {row.fixtures.slice(0, -1).map((fixture, colIndex) => (
-                      <td 
+                      <td
                         key={colIndex}
                         className="hide-on-mobile"
                         style={{
@@ -364,12 +364,12 @@ export default function ScoreTable() {
                       {row.total_success}
                     </td>
                   </tr>
-                  
+
                   {/* Expanded Row Details */}
                   {isExpanded && (
                     <tr>
-                      <td colSpan={data.table_head.length + 4} style={{ 
-                        backgroundColor: '#f9f9f9', 
+                      <td colSpan={data.table_head.length + 4} style={{
+                        backgroundColor: '#f9f9f9',
                         padding: '15px'
                       }}>
                         <ExpandedDetails row={row} tableHead={data.table_head} />
@@ -384,10 +384,10 @@ export default function ScoreTable() {
       </div>
 
       {/* Chart */}
-      <div style={{ 
-        marginTop: '30px', 
-        padding: '15px', 
-        backgroundColor: '#fff', 
+      <div style={{
+        marginTop: '30px',
+        padding: '15px',
+        backgroundColor: '#fff',
         borderRadius: '8px',
         overflowX: 'auto',
         WebkitOverflowScrolling: 'touch'
@@ -402,9 +402,9 @@ export default function ScoreTable() {
 function PodiumCard({ user, rank }) {
   const heights = { 1: 120, 2: 90, 3: 70 }
   const colors = { 1: '#FFD700', 2: '#C0C0C0', 3: '#CD7F32' }
-  
+
   return (
-    <div 
+    <div
       className="podium-card"
       style={{
         textAlign: 'center',
@@ -425,7 +425,7 @@ function PodiumCard({ user, rank }) {
       }}>
         {user.user}
       </div>
-      <div 
+      <div
         className="podium-bar"
         style={{
           height: `${heights[rank]}px`,
@@ -451,12 +451,12 @@ function PodiumCard({ user, rank }) {
 // Sortable Header Component
 function SortableHeader({ column, label, sortBy, sortAsc, onSort, className }) {
   const isActive = sortBy === column
-  
+
   return (
-    <th 
+    <th
       onClick={() => onSort(column)}
       className={className}
-      style={{ 
+      style={{
         cursor: 'pointer',
         userSelect: 'none',
         backgroundColor: isActive ? '#e8e8e8' : 'transparent',
@@ -482,7 +482,7 @@ function AccuracyBadge({ accuracy }) {
   else if (accuracy >= 45) badgeClass = 'label-info'
   else if (accuracy >= 30) badgeClass = 'label-warning'
   else badgeClass = 'label-danger'
-  
+
   return (
     <span className={`label ${badgeClass}`} style={{ fontSize: '0.85em', padding: '4px 6px' }}>
       {accuracy}%
@@ -493,7 +493,7 @@ function AccuracyBadge({ accuracy }) {
 // Form Guide Component
 function FormGuide({ form }) {
   if (!form || form.length === 0) return null
-  
+
   return (
     <div style={{ display: 'flex', gap: '2px', justifyContent: 'center' }}>
       {form.map((result, index) => (
@@ -524,7 +524,7 @@ function FormGuide({ form }) {
 function getScoreColor(success, games) {
   if (!games || games === 0) return 'transparent'
   const ratio = success / games
-  
+
   if (ratio >= 0.7) return 'rgba(92, 184, 92, 0.3)'  // Green
   if (ratio >= 0.5) return 'rgba(91, 192, 222, 0.3)' // Blue
   if (ratio >= 0.3) return 'rgba(240, 173, 78, 0.3)' // Orange
@@ -534,15 +534,15 @@ function getScoreColor(success, games) {
 // Expanded Details Component
 function ExpandedDetails({ row, tableHead }) {
   const fixtureData = row.fixtures.slice(0, -1)
-  
+
   // Calculate stats
-  const bestFixture = fixtureData.reduce((best, curr) => 
+  const bestFixture = fixtureData.reduce((best, curr) =>
     curr.success > (best?.success || 0) ? curr : best, null)
-  const worstFixture = fixtureData.reduce((worst, curr) => 
+  const worstFixture = fixtureData.reduce((worst, curr) =>
     curr.success < (worst?.success || Infinity) ? curr : worst, null)
-  
-  const avgPerFixture = row.total_games > 0 
-    ? (row.total_success / fixtureData.length).toFixed(1) 
+
+  const avgPerFixture = row.total_games > 0
+    ? (row.total_success / fixtureData.length).toFixed(1)
     : 0
 
   return (
@@ -550,13 +550,13 @@ function ExpandedDetails({ row, tableHead }) {
       <h4 style={{ marginBottom: '15px', fontSize: 'clamp(1rem, 4vw, 1.25rem)' }}>
         📊 סטטיסטיקות - {row.user}
       </h4>
-      
-      <div 
+
+      <div
         className="stat-boxes"
-        style={{ 
-          display: 'flex', 
-          gap: '15px', 
-          flexWrap: 'wrap', 
+        style={{
+          display: 'flex',
+          gap: '15px',
+          flexWrap: 'wrap',
           marginBottom: '15px',
           justifyContent: 'flex-start'
         }}
@@ -565,14 +565,14 @@ function ExpandedDetails({ row, tableHead }) {
         <StatBox label="נכונים" value={row.total_success} />
         <StatBox label="אחוז" value={`${row.accuracy}%`} />
         <StatBox label="ממוצע" value={avgPerFixture} />
-        <StatBox 
-          label="הכי טוב" 
-          value={bestFixture ? `${bestFixture.fixture}` : '-'} 
+        <StatBox
+          label="הכי טוב"
+          value={bestFixture ? `${bestFixture.fixture}` : '-'}
           color="#5cb85c"
         />
-        <StatBox 
-          label="הכי חלש" 
-          value={worstFixture ? `${worstFixture.fixture}` : '-'} 
+        <StatBox
+          label="הכי חלש"
+          value={worstFixture ? `${worstFixture.fixture}` : '-'}
           color="#d9534f"
         />
       </div>
@@ -580,11 +580,11 @@ function ExpandedDetails({ row, tableHead }) {
       {/* Mini chart for this user */}
       <div className="mini-chart-container" style={{ marginTop: '10px' }}>
         <strong>ביצועים לפי מחזור:</strong>
-        <div style={{ 
-          display: 'flex', 
-          gap: '4px', 
-          marginTop: '10px', 
-          alignItems: 'flex-end', 
+        <div style={{
+          display: 'flex',
+          gap: '4px',
+          marginTop: '10px',
+          alignItems: 'flex-end',
           height: '50px',
           overflowX: 'auto',
           paddingBottom: '5px'
@@ -592,7 +592,7 @@ function ExpandedDetails({ row, tableHead }) {
           {fixtureData.map((fixture, index) => {
             const maxSuccess = Math.max(...fixtureData.map(f => f.success || 0), 1)
             const height = ((fixture.success || 0) / maxSuccess) * 40 + 10
-            
+
             return (
               <div
                 key={index}
@@ -625,7 +625,7 @@ function ExpandedDetails({ row, tableHead }) {
 // Stat Box Component
 function StatBox({ label, value, color }) {
   return (
-    <div 
+    <div
       className="stat-box"
       style={{
         textAlign: 'center',
