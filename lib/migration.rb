@@ -8,32 +8,35 @@ module Migration
     team
   end
 
+
+
   def fetch_fixture_one(league_id, fixture_round)
     league = League.find_by_id(league_id)
-    round_games = Migration.fetch_and_parse_one_json().fetch('Data',{})['Leagues'].first['Matches'].select!{ |x| x['Round']['Name']['Main'] == "ליגת העל Winner - מחזור #{fixture_round}" }
+    json = Migration.fetch_and_parse_one_json()
+    round_games = json['matches']["מחזור #{fixture_round}"]
     Rails.logger.error "During migration got result #{round_games}"
 
-    parsed_fixture_date = Time.at(round_games.first['Timer']['Kickoff']).to_datetime
+    parsed_fixture_date = DateTime.parse(round_games.first['date'])
     if parsed_fixture_date.nil?
-      throw "Weird date from ${round_games.first['Timer']['Kickoff']}"
+      throw "Weird date from ${round_games.first['date']}"
     end
     fixture = Fixture.where(league: league, number: fixture_round).first ||
         Fixture.new(league: league, date: parsed_fixture_date, number: fixture_round)
     fixture.save!
 
     round_games.each do |game|
-        game_date = Time.at(game['Timer']['Kickoff']).to_datetime
+        game_date = DateTime.parse(game['date'])
         parsed_fixture_date = game_date if parsed_fixture_date > game_date
 
         score = nil
-        home_team_score = game['Home']['Score']['Match']
-        away_team_score = game['Away']['Score']['Match']
-        if home_team_score >= 0 && away_team_score >= 0
+        home_team_score = game.dig('homeTeam', 'score')
+        away_team_score = game.dig('awayTeam', 'score')
+        if home_team_score && away_team_score && home_team_score >= 0 && away_team_score >= 0
           score = "#{away_team_score}-#{home_team_score}"
         end
 
-        home_team_id = game['Home']['ID']
-        away_team_id = game['Away']['ID']
+        home_team_id = game['homeTeam']['id']
+        away_team_id = game['awayTeam']['id']
         home_team = Team.where(one_id: home_team_id).first
         away_team = Team.where(one_id: away_team_id).first
         if (home_team.nil? || away_team.nil?)
@@ -72,15 +75,11 @@ module Migration
   end
 
   def fetch_and_parse_one_json()
-    uri = URI.parse("https://www.one.co.il/cat/leagues/AjaxActions.ashx?a=get-matches&season=25-26&l=1")
+    uri = URI.parse("https://www.one.co.il/api/league/1")
     request = Net::HTTP::Get.new(uri)
-    request["Sec-Ch-Ua"] = "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
-    request["Accept"] = "application/json, text/javascript, */*; q=0.01"
+    request["Accept"] = "*/*"
     request["Referer"] = "https://www.one.co.il/Soccer/League/1"
-    request["X-Requested-With"] = "XMLHttpRequest"
-    request["Sec-Ch-Ua-Mobile"] = "?0"
-    request["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
-    request["Sec-Ch-Ua-Platform"] = "\"macOS\""
+    request["User-Agent"] = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36"
 
     req_options = {
       use_ssl: uri.scheme == "https",
